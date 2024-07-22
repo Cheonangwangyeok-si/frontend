@@ -7,9 +7,9 @@ const Calendar = ({ dummy, currentDate, setCurrentDate, getYearMonthDay }) => {
     const moveMonth = (direction) => {
         const nextMonth = new Date(currentDate);
         if (direction === '<') {
-            nextMonth.setMonth(nextMonth.getMonth() - 1);
+            nextMonth.setMonth(nextMonth.getMonth() - 1,1);
         } else {
-            nextMonth.setMonth(nextMonth.getMonth() + 1);
+            nextMonth.setMonth(nextMonth.getMonth() + 1,1);
         }
         setCurrentDate(nextMonth);
     }
