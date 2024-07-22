@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/Day.scss';
+import '../styles/calendar/Day.scss';
 
 const Day = ({ day, event, id, currentDate, setCurrentDate, getYearMonthDay }) => {
     const onClick = () => {
