@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/DiaryInput.scss';
 
-const DiaryInput = ({ setDummy, dummy, id, modifyEvent }) => {
+const DiaryInput = ({ setDummy, dummy, id }) => {
     const [content, setContent] = useState('');
 
     const onChange = e => {
@@ -17,27 +17,15 @@ const DiaryInput = ({ setDummy, dummy, id, modifyEvent }) => {
                 date: id,
                 event: content,
             };
-
-            if (modifyEvent) {
-                const nextDummy = dummy.map(item =>
-                    item.date === id ? inputData : item
-                );
-                setDummy(nextDummy);
-            } else {
-                const nextDummy = [...dummy, inputData];
-                setDummy(nextDummy);
-            }
+            const nextDummy = [...dummy, inputData];
+            setDummy(nextDummy);
             setContent('');
         }
     }
 
     useEffect(() => {
-        if (modifyEvent) {
-            setContent(modifyEvent.event);
-        } else {
-            setContent('');
-        }
-    }, [modifyEvent, id]);
+        setContent('');
+    }, [id]);
 
     return (
         <div className='diaryInput'>

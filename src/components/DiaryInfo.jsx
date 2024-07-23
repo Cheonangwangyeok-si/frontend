@@ -2,11 +2,7 @@ import React from 'react';
 import '../styles/DiaryInfo.scss';
 
 
-const DiaryInfo = ({ id, data, setDummy, dummy, setEventBool, setModifyEvent }) => {
-    const onModify = () => {
-        setModifyEvent(data);
-        setEventBool(false);
-    }
+const DiaryInfo = ({ id, data, setDummy, dummy }) => {
 
     const onDelete = () => {
         const nextDummy = dummy.filter(
@@ -24,7 +20,7 @@ const DiaryInfo = ({ id, data, setDummy, dummy, setEventBool, setModifyEvent }) 
                 <br />
                 {data?.event}
                 <br />
-                <button onClick={onModify}>수정</button>
+
                 <button onClick={onDelete}>삭제</button>
             </section>
         </div >

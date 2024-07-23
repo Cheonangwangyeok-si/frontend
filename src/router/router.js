@@ -3,7 +3,7 @@ import React from "react";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import AnalyzeView from "../pages/AnalyzeView";
-import CalendarView from "../pages/CalendarView";
+import DiaryView from "../pages/DiaryView";
 import Layout from "../layout/Layout";
 import Signup from "../pages/Signup";
 
@@ -24,8 +24,8 @@ const router = createBrowserRouter([
         element: <AnalyzeView />,
       },
       {
-        path: "calendar",
-        element: <CalendarView />,
+        path: "diary",
+        element: <DiaryView />,
       },
       {
         path: "signup",

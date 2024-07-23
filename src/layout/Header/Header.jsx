@@ -18,7 +18,7 @@ const Header = () => {
           </li>
           <li className="nav-item">
             <NavLink
-              to="/calendar"
+              to="/diary"
               className="nav-link"
               activeClassName="active"
             >

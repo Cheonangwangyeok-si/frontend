@@ -3,18 +3,18 @@ import leftImage from "../styles/calendar/left-btn.png";
 import RightImage from "../styles/calendar/right-btn.png";
 import Day from './Day';
 
-const Calendar = ({ dummy, currentDate, setCurrentDate, getYearMonthDay }) => {
+const Calendar = ({ dummy, currentDate, setCurrentDate, getYearMonthDay, setClickDay, clickDay }) => {
     const weeks = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAU'];
     const monthNames = [
         'January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'
-      ];
+    ];
     const moveMonth = (direction) => {
         const nextMonth = new Date(currentDate);
         if (direction === '<') {
-            nextMonth.setMonth(nextMonth.getMonth() - 1,1);
+            nextMonth.setMonth(nextMonth.getMonth() - 1, 1);
         } else {
-            nextMonth.setMonth(nextMonth.getMonth() + 1,1);
+            nextMonth.setMonth(nextMonth.getMonth() + 1, 1);
         }
         setCurrentDate(nextMonth);
     }
@@ -64,18 +64,18 @@ const Calendar = ({ dummy, currentDate, setCurrentDate, getYearMonthDay }) => {
     return (
         <div className='calendar'>
             <div className='header1'>
-                    <img className='left-btn' 
-                    onClick={() => { moveMonth('<') }} 
+                <img className='left-btn'
+                    onClick={() => { moveMonth('<') }}
                     src={leftImage} alt="left-btn"
-                    />
+                />
                 <div>
                     <b>{monthNames[currentDate.getMonth()]}, </b>
                     <b>{currentDate.getFullYear()}</b>
                 </div>
-                <img className='right-btn' 
-                    onClick={() => { moveMonth('>') }} 
+                <img className='right-btn'
+                    onClick={() => { moveMonth('>') }}
                     src={RightImage} alt="right-btn"
-                    />
+                />
             </div>
 
             <section>
@@ -94,6 +94,8 @@ const Calendar = ({ dummy, currentDate, setCurrentDate, getYearMonthDay }) => {
                         setCurrentDate={setCurrentDate}
                         currentDate={currentDate}
                         getYearMonthDay={getYearMonthDay}
+                        setClickDay={setClickDay}
+                        clickDay={clickDay}
                     />
                 ))}
             </main>
