@@ -1,0 +1,26 @@
+    .header1{
+       display: flex;
+       justify-content: space-between;
+       flex:0.5;
+        color :#2353b5;
+       img {
+            cursor: pointer; 
+            width: 32px;
+            height: 21.18px;
+       }
+    }
+    section {
+        display: flex;
+        flex:0.5;
+        color: #2353b5;
+        div{
+            flex:1;
+            
+        }
+    }
+    main {
+        flex:8.5;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 1px;
+    }

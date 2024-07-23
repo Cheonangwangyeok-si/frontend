@@ -1,9 +1,14 @@
-import '../styles/Calendar.scss';
+import '../styles/calendar/Calendar.scss';
+import leftImage from "../styles/calendar/left-btn.png";
+import RightImage from "../styles/calendar/right-btn.png";
 import Day from './Day';
 
 const Calendar = ({ dummy, currentDate, setCurrentDate, getYearMonthDay }) => {
-    const weeks = ['일', '월', '화', '수', '목', '금', '토'];
-
+    const weeks = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAU'];
+    const monthNames = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+      ];
     const moveMonth = (direction) => {
         const nextMonth = new Date(currentDate);
         if (direction === '<') {
@@ -58,14 +63,20 @@ const Calendar = ({ dummy, currentDate, setCurrentDate, getYearMonthDay }) => {
 
     return (
         <div className='calendar'>
-            <header>
-                <button onClick={() => { moveMonth('<') }}>이전 달</button>
+            <div className='header1'>
+                    <img className='left-btn' 
+                    onClick={() => { moveMonth('<') }} 
+                    src={leftImage} alt="left-btn"
+                    />
                 <div>
-                    <b>{currentDate.getMonth() + 1}월 </b>
-                    <span>{currentDate.getFullYear()}년</span>
+                    <b>{monthNames[currentDate.getMonth()]}, </b>
+                    <b>{currentDate.getFullYear()}</b>
                 </div>
-                <button onClick={() => { moveMonth('>') }}>다음 달</button>
-            </header>
+                <img className='right-btn' 
+                    onClick={() => { moveMonth('>') }} 
+                    src={RightImage} alt="right-btn"
+                    />
+            </div>
 
             <section>
                 {weeks.map((week, index) => {

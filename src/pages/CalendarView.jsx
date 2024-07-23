@@ -4,6 +4,8 @@ import Calendar from "../components/Calendar";
 import DiaryInput from "../components/DiaryInput";
 import DiaryInfo from "../components/DiaryInfo";
 import Chart from "../components/Chart";
+import '../styles/CalendarView.scss';
+
 
 const CalendarView = () => {
   const [dummy, setDummy] = useState([
@@ -54,7 +56,10 @@ const CalendarView = () => {
   }, [id, checkEvent]);
 
   return (
-    <div>
+    <div className="diary-page">
+      <aside className="sidebar">
+        
+      </aside>
       <Calendar
         dummy={dummy}
         currentDate={currentDate}
