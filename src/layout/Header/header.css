@@ -1,16 +1,15 @@
-.header {
+.header-1 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
+  padding: 10px;
   background-color: #fff;
   border-bottom: 1px solid #ccc;
 }
 
 .logo {
-  width: 80px;
-  height: 40px;
-  background-color: #ccc;
+  width: 193.85px;
+  height: 53px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,16 +19,15 @@
 }
 
 .navigation {
-  flex-grow: 1;
   text-align: center;
 }
 
 .navigation ul {
+  width: 100%;
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
-  justify-content: center;
 }
 
 .nav-item {
@@ -51,9 +49,9 @@
   content: "";
   position: absolute;
   width: 100%;
-  height: 5px;
+  height: 7px;
   left: 0;
-  bottom: -5px;
+  bottom: -8px;
   background: url("./밑줄.png") no-repeat center;
   background-size: cover;
 }
@@ -72,9 +70,10 @@
 }
 
 .login-btn {
-  background-color: transparent;
-  color: #0056b3;
+  background-color: #0056b3;
+  color: white;
   border: 1px solid #0056b3;
+  border-radius: 8px;
 }
 
 .get-started-btn {

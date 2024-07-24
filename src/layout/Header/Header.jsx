@@ -2,45 +2,35 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./header.css";
 import underlineImage from "./밑줄.png";
-
+import logoImage from "./logo.png";
 const Header = () => {
   return (
-    <header className="header">
-      <div className="logo">
-        <span>로고</span>
-      </div>
+    <header className="header-1">
       <nav className="navigation">
         <ul>
           <li className="nav-item">
-            <NavLink to="/home" className="nav-link" activeClassName="active">
+            <NavLink to="/" className="nav-link" activeClassName="active">
               HOME
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink
-              to="/diary"
+              to="/calendar"
               className="nav-link"
               activeClassName="active"
             >
               DIARY
             </NavLink>
           </li>
-          <li className="nav-item">
-            <NavLink
-              to="/analyze"
-              className="nav-link"
-              activeClassName="active"
-            >
-              DOPAMINE
-            </NavLink>
-          </li>
         </ul>
       </nav>
+      <div className="logo">
+        <img src={logoImage} alt="logo" />
+      </div>
       <div className="auth-buttons">
-        <NavLink to="/">
+        <NavLink to="/login">
           <button className="login-btn">Log in</button>
         </NavLink>
-        <button className="get-started-btn">Get started</button>
       </div>
     </header>
   );
