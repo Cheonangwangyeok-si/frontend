@@ -127,16 +127,22 @@ const CalendarView = () => {
 
 
       {activeComponent === "analyzeView" && (
-        <div>감정 분석 통계</div>
+        <div className="main-container">
+          <h1>EMOTION ANALYSIS</h1>
+        </div>
       )}
 
       {activeComponent === "diaryInput" && (
         // 감정 일기 작성하기 부분
-        <DiaryInput
-          id={id}
-          dummy={dummy}
-          setDummy={setDummy}
-        />)}
+        <div className="main-container">
+          <h1>WRITE AN EMOTIONAL DIARY</h1>
+          <DiaryInput
+            id={id}
+            dummy={dummy}
+            setDummy={setDummy}
+          />
+        </div>
+      )}
     </div>
   );
 };

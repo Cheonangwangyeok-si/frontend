@@ -1,19 +1,19 @@
 .day {
-    border: 1px solid black;
     display: flex; 
     align-items: center; 
     justify-content: center; 
     position: relative;
     z-index: 0;
-
-    &:hover{
-        border: 1px solid rgb(250, 250, 250);
-        cursor: pointer;
-    }
-
+    height: 100px;
+    width: 100%;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
 }
+
 .currentDay {
     color:white;
+    transition: 0.1s;
         &::before{
         content: "";
         position: absolute;
@@ -32,7 +32,7 @@
     &::after{
         content: "";
         position: absolute;
-        top: 30%;
+        top: 20%;
         left: 50%;
         width: 12px; 
         height:12px; 

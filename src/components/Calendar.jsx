@@ -62,15 +62,14 @@ const Calendar = ({ dummy, currentDate, setCurrentDate, getYearMonthDay, setClic
     };
 
     return (
-        <div className='calendar'>
-            <div className='header1'>
+        <div className='calendar-container1'>
+            <div className='calendar-header'>
                 <img className='left-btn'
                     onClick={() => { moveMonth('<') }}
                     src={leftImage} alt="left-btn"
                 />
-                <div>
-                    <b>{monthNames[currentDate.getMonth()]}, </b>
-                    <b>{currentDate.getFullYear()}</b>
+                <div className='calendar-month-year'>
+                    <div>{monthNames[currentDate.getMonth()]}, {currentDate.getFullYear()} </div>
                 </div>
                 <img className='right-btn'
                     onClick={() => { moveMonth('>') }}
@@ -78,13 +77,13 @@ const Calendar = ({ dummy, currentDate, setCurrentDate, getYearMonthDay, setClic
                 />
             </div>
 
-            <section>
+            <div className='calendar-weeks'>
                 {weeks.map((week, index) => {
                     return <div key={index}>{week}</div>
                 })}
-            </section>
+            </div>
 
-            <main>
+            <div className='calendar-days'>
                 {days.map((day) => (
                     < Day
                         id={getYearMonthDay(day)}
@@ -98,7 +97,7 @@ const Calendar = ({ dummy, currentDate, setCurrentDate, getYearMonthDay, setClic
                         clickDay={clickDay}
                     />
                 ))}
-            </main>
+            </div>
         </div>
     );
 };
