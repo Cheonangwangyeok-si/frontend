@@ -57,12 +57,12 @@ const AnalyzeView = () => {
       <div className="analysis-container">
         <div className="chart-container">
           <div className="chart">
-            <div className="chart-title">This Week</div>
-            <Chart data={lastweekData} lastweek="true" />
+            <div className="chart-title">THIS WEEK</div>
+            <Chart data={lastweekData} />
           </div>
           <div className="chart">
-            <div className="chart-title">Last Week</div>
-            <Chart data={thisweekData} lastweek="false" />
+            <div className="chart-title">LAST WEEK</div>
+            <Chart data={thisweekData} />
           </div>
         </div>
         <div className="calendar-container">
