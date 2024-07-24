@@ -5,6 +5,9 @@ import DiaryInput from "../components/DiaryInput";
 import DiaryInfo from "../components/DiaryInfo";
 import Chart from "../components/Chart";
 import '../styles/DiaryView.scss';
+import calendarImage from "../images/DiaryViewImage/Calendar.png";
+import DiaryImage from "../images/DiaryViewImage/Diary.png";
+import AnalyzeImage from "../images/DiaryViewImage/Analyze.png";
 
 
 const CalendarView = () => {
@@ -67,46 +70,64 @@ const CalendarView = () => {
   return (
     <div className="diary-page">
       <aside className="sidebar">
-        <div onClick={() => { onClick("diaryInput") }}>감정 일기 작성하기</div>
+        <button onClick={() => { onClick("diaryInput") }}>감정 일기 작성하기</button>
         <hr />
-        <div onClick={() => { onClick("calendar") }}>달력</div>
-        <div onClick={() => { onClick("diaryList") }}>작성한 감정 일기</div>
-        <div onClick={() => { onClick("analyzeView") }}>감정 분석 통계</div>
+        <ul>
+          <li className={activeComponent === "calendar" ? "activeLi" : ""}
+            onClick={() => { onClick("calendar") }}>
+            <img src={calendarImage} />달력</li>
+          <li className={activeComponent === "diaryList" ? "activeLi" : ""}
+            onClick={() => { onClick("diaryList") }}>
+            <img src={DiaryImage} />작성한 감정 일기</li>
+          <li className={activeComponent === "analyzeView" ? "activeLi" : ""}
+            onClick={() => { onClick("analyzeView") }}>
+            <img src={AnalyzeImage} />감정 분석 통계</li>
+        </ul>
       </aside>
 
       {activeComponent === "calendar" && (
-        <div style={{ display: "flex" }}>
-          <Calendar
-            dummy={dummy}
-            currentDate={currentDate}
-            setCurrentDate={setCurrentDate}
-            getYearMonthDay={getYearMonthDay}
-            setClickDay={setClickDay}
-            clickDay={clickDay}
-          />
-          {eventBool ?
-            <div>
-              <DiaryInfo
-                id={id}
-                dummy={dummy}
-                setDummy={setDummy}
-                data={checkEvent(id)}
-                setEventBool={setEventBool}
-              />
-              <div className="analysis-page">
-                <div className="chart-container">
-                  <Chart data={thisweekData} lastweek="false" />
+        <div className="main-container">
+          <h1>CALENDAR</h1>
+          <div className="main-content">
+            <Calendar
+              dummy={dummy}
+              currentDate={currentDate}
+              setCurrentDate={setCurrentDate}
+              getYearMonthDay={getYearMonthDay}
+              setClickDay={setClickDay}
+              clickDay={clickDay}
+            />
+            {eventBool ?
+              <div>
+                <DiaryInfo
+                  id={id}
+                  dummy={dummy}
+                  setDummy={setDummy}
+                  data={checkEvent(id)}
+                  setEventBool={setEventBool}
+                />
+                <div className="analysis-page">
+                  <div className="chart-container">
+                    <Chart data={thisweekData} lastweek="false" />
+                  </div>
                 </div>
               </div>
-            </div>
-            :
-            <div>diaryList</div>
-          }
+              :
+              <div>diaryList요약</div>
+            }
+          </div>
         </div>
       )}
 
       {activeComponent === "diaryList" && (
-        <div>일기 리스트</div>
+        <div className="main-container">
+          <h1>MY EMOTIONAL DIARY</h1>
+        </div>
+      )}
+
+
+      {activeComponent === "analyzeView" && (
+        <div>감정 분석 통계</div>
       )}
 
       {activeComponent === "diaryInput" && (
@@ -116,10 +137,6 @@ const CalendarView = () => {
           dummy={dummy}
           setDummy={setDummy}
         />)}
-      {activeComponent === "analyzeView" && (
-        <div>감정 분석 통계</div>
-      )}
-
     </div>
   );
 };

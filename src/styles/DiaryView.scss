@@ -1,22 +1,73 @@
 .diary-page{
+    background-color: #F5F4F7;
     display: flex;
-    margin-top: 20px;
     height: 100vh;
     width: 100%;
+    padding: 20px 156px 0px 1px;
+}
+
+.main-container{
+    
+    h1{
+        font-size: 36px;
+        color: #2353b5;
+    }
+
+    .main-content{
+        display: flex;
+    }
 }
 
 .sidebar {
-    border: 1px solid black;
-    margin-right: 40px;
-    width: 280px;
-    height: 100vh;
+    background-color: white;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+    padding: 24px;
+    font-size: 16px;
+    color:#2353b5;
+    font-weight:600;
+
+    button {
+        background-color: #2353b5;
+        width: 232px;
+        height: 64px;
+        font-size: 16px;
+        font-weight:600;
+        color:white;
+        border-radius: 32px;
+        border:none;
+        cursor: pointer;
+    }
+
+    li {
+        width: 232px;
+        height: 48px;
+        border-radius: 8px;
+        display: flex;
+        transition: background-color 0.3s;  
+        align-items: center; 
+
+        img{
+            width: 24px;
+            height: 24px;
+            padding: 12px 20px;
+        }
+    }
+
+    .activeLi {
+        background-color: rgba(35, 83, 181, 0.1);
+    }
+
+    hr {
+        margin: 24px 0px;
+        opacity: 0.4;
+    }
 }
 
 .calendar {
     display: flex;
     flex-direction: column;
     border: 2px solid #2353b5;
-    width: 748px;
     text-align: center;
     background: white;
     padding: 40px;
