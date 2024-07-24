@@ -15,7 +15,7 @@ const DiaryInput = ({ setDummy, dummy, id }) => {
         } else {
             const inputData = {
                 date: id,
-                event: content,
+                content: content,
             };
             const nextDummy = [...dummy, inputData];
             setDummy(nextDummy);

@@ -4,25 +4,40 @@ import Calendar from "../components/Calendar";
 import DiaryInput from "../components/DiaryInput";
 import DiaryInfo from "../components/DiaryInfo";
 import Chart from "../components/Chart";
+import DiaryList from "../components/DiaryList";
 import '../styles/DiaryView.scss';
 import calendarImage from "../images/DiaryViewImage/Calendar.png";
 import DiaryImage from "../images/DiaryViewImage/Diary.png";
 import AnalyzeImage from "../images/DiaryViewImage/Analyze.png";
+import HappyImage from "../images/Happy.png";
+import AngryImage from "../images/Angry.png";
+import SadImage from "../images/Sad.png";
+import SurprisedImage from "../images/Surprised.png";
+import BoringImage from "../images/Boring.png";
 
 
 const CalendarView = () => {
   const [dummy, setDummy] = useState([
     {
       date: "2024-07-01",
-      event: "ㄴ",
+      title: "여름의 한가운데에서 느낀 슬픔",
+      content: "진짜 아주 긴 내용1",
+      sumContent: "요약된 일기 내용1",
+      emotion: HappyImage,
     },
     {
       date: "2024-07-02",
-      event: "집",
+      title: "여름의 한가운데에서 느낀 분노",
+      content: "진짜 아주 긴 내용2",
+      sumContent: "요약된 일기 내용2",
+      emotion: AngryImage,
     },
     {
-      date: "2024-07-14",
-      event: "집",
+      date: "2024-07-24",
+      title: "여름의 한가운데에서 느낀 절망",
+      content: "진짜 아주 긴 내용3",
+      sumContent: "요약된 일기 내용3",
+      emotion: SadImage,
     },
   ]);
 
@@ -88,7 +103,7 @@ const CalendarView = () => {
       {activeComponent === "calendar" && (
         <div className="main-container">
           <h1>CALENDAR</h1>
-          <div className="main-content">
+          <div className="main-content1">
             <Calendar
               dummy={dummy}
               currentDate={currentDate}
@@ -97,7 +112,8 @@ const CalendarView = () => {
               setClickDay={setClickDay}
               clickDay={clickDay}
             />
-            {eventBool ?
+
+            {eventBool && clickDay ?
               <div>
                 <DiaryInfo
                   id={id}
@@ -113,7 +129,7 @@ const CalendarView = () => {
                 </div>
               </div>
               :
-              <div>diaryList요약</div>
+              <DiaryList diaryData={dummy} />
             }
           </div>
         </div>

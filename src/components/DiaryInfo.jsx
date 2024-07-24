@@ -18,7 +18,7 @@ const DiaryInfo = ({ id, data, setDummy, dummy }) => {
             </section>
             <section>
                 <br />
-                {data?.event}
+                {data?.content}
                 <br />
 
                 <button onClick={onDelete}>삭제</button>
