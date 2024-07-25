@@ -26,18 +26,32 @@ const CalendarView = () => {
       emotion: HappyImage,
     },
     {
-      date: "2024-07-02",
+      date: "2024-07-16",
       title: "여름의 한가운데에서 느낀 분노",
       content: "진짜 아주 긴 내용2",
       sumContent: "요약된 일기 내용2",
       emotion: AngryImage,
     },
     {
-      date: "2024-07-24",
+      date: "2024-07-17",
       title: "여름의 한가운데에서 느낀 절망",
       content: "진짜 아주 긴 내용3",
       sumContent: "요약된 일기 내용3",
       emotion: SadImage,
+    },
+    {
+      date: "2024-07-20",
+      title: "여름의 한가운데에서 느낀 절망",
+      content: "진짜 아주 긴 내용4",
+      sumContent: "요약된 일기 내용4",
+      emotion: SurprisedImage,
+    },
+    {
+      date: "2024-07-25",
+      title: "여름의 한가운데에서 느낀 절망",
+      content: "진짜 아주 긴 내용5",
+      sumContent: "요약된 일기 내용5",
+      emotion: BoringImage,
     },
   ]);
 
@@ -129,7 +143,10 @@ const CalendarView = () => {
                 </div>
               </div>
               :
-              <DiaryList diaryData={dummy} />
+              <DiaryList
+                diaryData={dummy}
+                setDummy={setDummy}
+              />
             }
           </div>
         </div>

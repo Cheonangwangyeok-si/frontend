@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/DiaryList.scss";
 
-function DiaryList({ diaryData }) {
+function DiaryList({ diaryData, setDummy }) {
   const [sort, setSort] = useState("Asc");
 
   const handleClick = (date) => {
@@ -11,6 +11,24 @@ function DiaryList({ diaryData }) {
 
   const onChange = (e) => {
     setSort(e.target.value);
+  }
+
+  useEffect(() => {
+    const sortData = [...diaryData].sort((a, b) => {
+      if (sort === "Asc") {
+        return new Date(a.date) - new Date(b.date);
+      } else {
+        return new Date(b.date) - new Date(a.date);
+      }
+    });
+    setDummy(sortData);
+  }, [sort])
+
+  const onDelete = (id) => {
+    const nextDummy = diaryData.filter(
+      item => item.date !== id
+    );
+    setDummy(nextDummy);
   }
 
   return (
@@ -23,12 +41,13 @@ function DiaryList({ diaryData }) {
       {diaryData.map((diary) => (
         <div key={diary.date} className="diary-summary" onClick={() => handleClick(diary.date)}>
           <div>
-            <p className="diary-summary-date">{diary.date}</p>
+            <p className="diary-summary-date">{diary.date.replace(/-/g, '.')}</p>
             <p className="diary-summary-title">{diary.title}</p>
             <p className="diary-summary-sumContent">{diary.sumContent}</p>
           </div>
-          <div style={{ marginRight: "32px" }}>
-            <div className="diary-summary-delete">삭제</div>
+          <div className="diary-summary-right">
+            <div className="diary-summary-delete"
+              onClick={() => { onDelete(diary.date) }}>삭제</div>
             <img src={diary.emotion} />
           </div>
         </div>
