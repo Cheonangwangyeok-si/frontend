@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: flex-end;
     position: relative;
-    top: -13px;
+    top: -17px;
 
     #sort {
         width: 131px;
@@ -16,6 +16,7 @@
     }
     
     .diary-summary{
+        cursor: pointer;
         box-sizing: border-box;
         height: 160px;
         width: 600px;
@@ -51,7 +52,11 @@
                 font-size: 14px;
                 color : #A8A8A8;
                 cursor: pointer;
-                
+
+                &:hover{
+                    transition: 0.3s;
+                    color: #6f6f6f;
+                }
             }
             img{
                 width: 72px;

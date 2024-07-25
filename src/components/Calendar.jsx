@@ -16,6 +16,7 @@ const Calendar = ({ dummy, currentDate, setCurrentDate, getYearMonthDay, setClic
         } else {
             nextMonth.setMonth(nextMonth.getMonth() + 1, 1);
         }
+        setClickDay(false);
         setCurrentDate(nextMonth);
     }
 

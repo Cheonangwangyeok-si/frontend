@@ -14,19 +14,20 @@ import AngryImage from "../images/Angry.png";
 import SadImage from "../images/Sad.png";
 import SurprisedImage from "../images/Surprised.png";
 import BoringImage from "../images/Boring.png";
+import DayFeedback from "../components/DayFeedback";
 
 
 const CalendarView = () => {
   const [dummy, setDummy] = useState([
     {
-      date: "2024-07-01",
+      date: "2024-06-01",
       title: "여름의 한가운데에서 느낀 슬픔",
       content: "진짜 아주 긴 내용1",
       sumContent: "요약된 일기 내용1",
       emotion: HappyImage,
     },
     {
-      date: "2024-07-16",
+      date: "2024-06-16",
       title: "여름의 한가운데에서 느낀 분노",
       content: "진짜 아주 긴 내용2",
       sumContent: "요약된 일기 내용2",
@@ -54,7 +55,6 @@ const CalendarView = () => {
       emotion: BoringImage,
     },
   ]);
-
   const [thisweekData, setThisweekData] = useState([
     { id: "기쁨", label: "기쁨", value: 20 },
     { id: "슬픔", label: "슬픔", value: 10 },
@@ -73,7 +73,6 @@ const CalendarView = () => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0");
     const day = String(date.getDate()).padStart(2, "0");
-
     return `${year}-${month}-${day}`;
   }, []);
 
@@ -128,24 +127,23 @@ const CalendarView = () => {
             />
 
             {eventBool && clickDay ?
-              <div>
+              <div className="dayDiaryInfo-container">
                 <DiaryInfo
                   id={id}
-                  dummy={dummy}
+                  diaryData={dummy} // 일기 삭제할 때
                   setDummy={setDummy}
-                  data={checkEvent(id)}
-                  setEventBool={setEventBool}
+                  setClickDay={setClickDay}
+                  dayDiaryInfo={checkEvent(id)} // 하루 일기 정보
                 />
-                <div className="analysis-page">
-                  <div className="chart-container">
-                    <Chart data={thisweekData} lastweek="false" />
-                  </div>
-                </div>
+                <DayFeedback />
               </div>
               :
               <DiaryList
                 diaryData={dummy}
                 setDummy={setDummy}
+                setClickDay={setClickDay}
+                currentDate={currentDate}
+                setCurrentDate={setCurrentDate}
               />
             }
           </div>

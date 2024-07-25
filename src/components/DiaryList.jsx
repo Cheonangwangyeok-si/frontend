@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "../styles/DiaryList.scss";
 
-function DiaryList({ diaryData, setDummy }) {
+function DiaryList({ diaryData, setDummy, currentDate, setCurrentDate, setClickDay }) {
+  // 정렬 어떻게 할 지 물어보기
   const [sort, setSort] = useState("Asc");
 
   const handleClick = (date) => {
-    console.log("click", date);
-    //TODO: 일기 상세 페이지로 이동
+    setCurrentDate(new Date(date));
+    setClickDay(true)
   };
 
   const onChange = (e) => {
@@ -24,11 +25,13 @@ function DiaryList({ diaryData, setDummy }) {
     setDummy(sortData);
   }, [sort])
 
-  const onDelete = (id) => {
+  const onDelete = (id, e) => {
+    e.stopPropagation();
     const nextDummy = diaryData.filter(
       item => item.date !== id
     );
     setDummy(nextDummy);
+    setClickDay(false)
   }
 
   return (
@@ -38,20 +41,23 @@ function DiaryList({ diaryData, setDummy }) {
         <option value="Desc">날짜 내림차순</option>
       </select>
 
-      {diaryData.map((diary) => (
-        <div key={diary.date} className="diary-summary" onClick={() => handleClick(diary.date)}>
-          <div>
-            <p className="diary-summary-date">{diary.date.replace(/-/g, '.')}</p>
-            <p className="diary-summary-title">{diary.title}</p>
-            <p className="diary-summary-sumContent">{diary.sumContent}</p>
+      {diaryData.map((diary) => {
+        return parseInt(diary.date.split('-')[1], 10) === currentDate.getMonth() + 1 ? (
+
+          <div key={diary.date} className="diary-summary" onClick={() => handleClick(diary.date)}>
+            <div>
+              <p className="diary-summary-date">{diary.date.replace(/-/g, '.')}</p>
+              <p className="diary-summary-title">{diary.title}</p>
+              <p className="diary-summary-sumContent">{diary.sumContent}</p>
+            </div>
+            <div className="diary-summary-right">
+              <div className="diary-summary-delete"
+                onClick={(e) => { onDelete(diary.date, e) }}>삭제</div>
+              <img src={diary.emotion} />
+            </div>
           </div>
-          <div className="diary-summary-right">
-            <div className="diary-summary-delete"
-              onClick={() => { onDelete(diary.date) }}>삭제</div>
-            <img src={diary.emotion} />
-          </div>
-        </div>
-      ))}
+        ) : null
+      })}
     </div>
   );
 }
