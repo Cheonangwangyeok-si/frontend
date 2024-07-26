@@ -30,30 +30,6 @@ $title-color: #2353B5;
   flex-direction: row;
 }
 
-.chart-container {
-  width: 600px;
-  height: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.chart-title {
-  font-size: 20px;
-  font-weight: bold;
-  color: $title-color;
-}
-
-.chart {
-  width: 100%;
-  height: 100%;
-  background: #ffffff;
-  border-radius: 32px;
-  padding: 20px;
-}
-
 .calendar-container {
   width: 50%;
   height: 50%;
@@ -68,22 +44,6 @@ $title-color: #2353B5;
 .calendar-title {
   font-size: 16px;
   color: $title-color;
-}
-
-.emotion-container {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  color: #353535;
-}
-
-.emotion-content {
-  width: 100px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
 }
 
 .feedback-content {

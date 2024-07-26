@@ -1,13 +1,18 @@
 import React from "react";
+import "../styles/Emotion.scss";
 
-function Emotion({ emotionName, emotionSrc, percent }) {
+function Emotion({ emotioData }) {
   return (
-    <div className="emotion-content">
-      <img src={emotionSrc} />
-      <div className="emotion-title">
-        <p>{emotionName}</p>
-        <p style={{fontWeight:"bold"}}>{percent}</p>
+    <div className="emotion-container">
+      { emotioData.map((data) => (
+      <div className="emotion-content">
+        <img src={data.src} />
+        <div className="emotion-title">
+          <p>{data.emotion}</p>
+          <p style={{ fontWeight: "bold" }}>{data.percent}</p>
+        </div>
       </div>
+      ))}
     </div>
   );
 }
