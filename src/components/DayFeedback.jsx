@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/DayFeedback.scss';
 
-const DayFeedback = () => {
+const DayFeedback = ({ dayDiaryInfo, Emotion }) => {
+
     return (
         <div className="day-feedback-container">
-            <h3>AI 감정 피드백</h3>
-            <div>감정들</div>
-            <p>행복행복행복행복행복행복행복</p>
-        </div>
+            < h3 > AI 감정 피드백</h3 >
+            <Emotion emotioData={dayDiaryInfo?.emotionData} />
+            <p>{dayDiaryInfo?.Feedback}</p>
+        </div >
     );
 };
 

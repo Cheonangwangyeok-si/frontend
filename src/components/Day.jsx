@@ -23,7 +23,7 @@ const Day = ({ day, event, id, currentDate, setCurrentDate, getYearMonthDay, set
     return (
         <div
             onClick={onClick}
-            className={`day ${id === getYearMonthDay(currentDate) && clickDay ? 'currentDay' : ''}`}
+            className={`day ${id === getYearMonthDay(currentDate) && clickDay ? 'currentDay' : ''} ${currentDate.getMonth() + 1 !== parseInt(id.split('-')[1], 10) ? 'invisible' : ''}`}
         >
             {day.getDate()}
             <div

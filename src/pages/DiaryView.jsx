@@ -20,6 +20,7 @@ import DayFeedback from "../components/DayFeedback";
 
 
 const CalendarView = () => {
+  // 받아올 일기 정보들
   const [dummy, setDummy] = useState([
     {
       date: "2024-06-01",
@@ -27,6 +28,34 @@ const CalendarView = () => {
       content: "진짜 아주 긴 내용1",
       sumContent: "요약된 일기 내용1",
       emotion: HappyImage,
+      Feedback: '6월 1일의 피드백 내용',
+      emotionData: [
+        {
+          emotion: "행복",
+          percent: "47%",
+          src: HappyImage,
+        },
+        {
+          emotion: "분노",
+          percent: "3%",
+          src: AngryImage,
+        },
+        {
+          emotion: "슬픔",
+          percent: "20%",
+          src: SadImage,
+        },
+        {
+          emotion: "놀람",
+          percent: "0%",
+          src: SurprisedImage,
+        },
+        {
+          emotion: "중립",
+          percent: "30%",
+          src: BoringImage,
+        },
+      ],
     },
     {
       date: "2024-06-16",
@@ -34,6 +63,34 @@ const CalendarView = () => {
       content: "진짜 아주 긴 내용2",
       sumContent: "요약된 일기 내용2",
       emotion: AngryImage,
+      Feedback: '6월 16일의 피드백 내용',
+      emotionData: [
+        {
+          emotion: "행복",
+          percent: "10%",
+          src: HappyImage,
+        },
+        {
+          emotion: "분노",
+          percent: "10%",
+          src: AngryImage,
+        },
+        {
+          emotion: "슬픔",
+          percent: "10%",
+          src: SadImage,
+        },
+        {
+          emotion: "놀람",
+          percent: "10%",
+          src: SurprisedImage,
+        },
+        {
+          emotion: "중립",
+          percent: "60%",
+          src: BoringImage,
+        },
+      ],
     },
     {
       date: "2024-07-17",
@@ -41,6 +98,34 @@ const CalendarView = () => {
       content: "진짜 아주 긴 내용3",
       sumContent: "요약된 일기 내용3",
       emotion: SadImage,
+      Feedback: '7월 17일의 피드백 내용',
+      emotionData: [
+        {
+          emotion: "행복",
+          percent: "100%",
+          src: HappyImage,
+        },
+        {
+          emotion: "분노",
+          percent: "0%",
+          src: AngryImage,
+        },
+        {
+          emotion: "슬픔",
+          percent: "0%",
+          src: SadImage,
+        },
+        {
+          emotion: "놀람",
+          percent: "0%",
+          src: SurprisedImage,
+        },
+        {
+          emotion: "중립",
+          percent: "30%",
+          src: BoringImage,
+        },
+      ],
     },
     {
       date: "2024-07-20",
@@ -48,6 +133,34 @@ const CalendarView = () => {
       content: "진짜 아주 긴 내용4",
       sumContent: "요약된 일기 내용4",
       emotion: SurprisedImage,
+      Feedback: '7월 20일의 피드백 내용',
+      emotionData: [
+        {
+          emotion: "행복",
+          percent: "47%",
+          src: HappyImage,
+        },
+        {
+          emotion: "분노",
+          percent: "3%",
+          src: AngryImage,
+        },
+        {
+          emotion: "슬픔",
+          percent: "20%",
+          src: SadImage,
+        },
+        {
+          emotion: "놀람",
+          percent: "0%",
+          src: SurprisedImage,
+        },
+        {
+          emotion: "중립",
+          percent: "30%",
+          src: BoringImage,
+        },
+      ],
     },
     {
       date: "2024-07-25",
@@ -55,6 +168,34 @@ const CalendarView = () => {
       content: "진짜 아주 긴 내용5",
       sumContent: "요약된 일기 내용5",
       emotion: BoringImage,
+      Feedback: '7월 25일의 피드백 내용',
+      emotionData: [
+        {
+          emotion: "행복",
+          percent: "47%",
+          src: HappyImage,
+        },
+        {
+          emotion: "분노",
+          percent: "3%",
+          src: AngryImage,
+        },
+        {
+          emotion: "슬픔",
+          percent: "20%",
+          src: SadImage,
+        },
+        {
+          emotion: "놀람",
+          percent: "0%",
+          src: SurprisedImage,
+        },
+        {
+          emotion: "중립",
+          percent: "30%",
+          src: BoringImage,
+        },
+      ],
     },
   ]);
   const [thisweekData, setThisweekData] = useState([
@@ -206,7 +347,10 @@ const CalendarView = () => {
                   setClickDay={setClickDay}
                   dayDiaryInfo={checkEvent(id)} // 하루 일기 정보
                 />
-                <DayFeedback />
+                <DayFeedback
+                  dayDiaryInfo={checkEvent(id)}
+                  Emotion={Emotion}
+                />
               </div>
               :
               <DiaryList

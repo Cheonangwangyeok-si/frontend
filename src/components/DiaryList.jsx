@@ -40,24 +40,25 @@ function DiaryList({ diaryData, setDummy, currentDate, setCurrentDate, setClickD
         <option value="Asc">날짜 오름차순</option>
         <option value="Desc">날짜 내림차순</option>
       </select>
+      <div className="diary-summary-list">
+        {diaryData.map((diary) => {
+          return parseInt(diary.date.split('-')[1], 10) === currentDate.getMonth() + 1 ? (
 
-      {diaryData.map((diary) => {
-        return parseInt(diary.date.split('-')[1], 10) === currentDate.getMonth() + 1 ? (
-
-          <div key={diary.date} className="diary-summary" onClick={() => handleClick(diary.date)}>
-            <div>
-              <p className="diary-summary-date">{diary.date.replace(/-/g, '.')}</p>
-              <p className="diary-summary-title">{diary.title}</p>
-              <p className="diary-summary-sumContent">{diary.sumContent}</p>
+            <div key={diary.date} className="diary-summary" onClick={() => handleClick(diary.date)}>
+              <div>
+                <p className="diary-summary-date">{diary.date.replace(/-/g, '.')}</p>
+                <p className="diary-summary-title">{diary.title}</p>
+                <p className="diary-summary-sumContent">{diary.sumContent}</p>
+              </div>
+              <div className="diary-summary-right">
+                <div className="diary-summary-delete"
+                  onClick={(e) => { onDelete(diary.date, e) }}>삭제</div>
+                <img src={diary.emotion} />
+              </div>
             </div>
-            <div className="diary-summary-right">
-              <div className="diary-summary-delete"
-                onClick={(e) => { onDelete(diary.date, e) }}>삭제</div>
-              <img src={diary.emotion} />
-            </div>
-          </div>
-        ) : null
-      })}
+          ) : null
+        })}
+      </div>
     </div>
   );
 }

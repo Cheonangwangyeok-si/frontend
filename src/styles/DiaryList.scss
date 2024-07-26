@@ -4,7 +4,7 @@
     align-items: flex-end;
     position: relative;
     top: -17px;
-
+    
     #sort {
         width: 131px;
         height: 30px;
@@ -13,6 +13,11 @@
         font-size: 16px;
         margin-right: 16px;
         margin-bottom: 13px;
+    }
+    
+    .diary-summary-list {
+        overflow-y: scroll;
+        height: 850px;
     }
     
     .diary-summary{
