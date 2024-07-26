@@ -1,16 +1,35 @@
 import React from 'react';
 import '../styles/calendar/Day.scss';
+import HappyImage from "../images/Happy.png";
+import AngryImage from "../images/Angry.png";
+import SadImage from "../images/Sad.png";
+import SurprisedImage from "../images/Surprised.png";
+import BoringImage from "../images/Boring.png";
+
+const emotionColors = {
+    [HappyImage]: '#FFE75C',
+    [AngryImage]: '#FF6262',
+    [SadImage]: '#3293D7',
+    [SurprisedImage]: '#FEBB00',
+    [BoringImage]: '#C6C6C6'
+};
 
 const Day = ({ day, event, id, currentDate, setCurrentDate, getYearMonthDay, setClickDay, clickDay }) => {
     const onClick = () => {
-        setCurrentDate(day)
+        setCurrentDate(day);
         setClickDay(true);
-    }
+    };
 
     return (
-        <div id={id} className={`day ${id === getYearMonthDay(currentDate) && clickDay ? 'currentDay' : ''} 
-                                ${event ? 'event' : ''}`} onClick={onClick}>
+        <div
+            onClick={onClick}
+            className={`day ${id === getYearMonthDay(currentDate) && clickDay ? 'currentDay' : ''}`}
+        >
             {day.getDate()}
+            <div
+                className={`${event ? 'event' : ''}`}
+                style={{ backgroundColor: emotionColors[event?.emotion] }}
+            ></div>
         </div>
     );
 };
