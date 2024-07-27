@@ -7,7 +7,7 @@ const DayFeedback = ({ dayDiaryInfo, Emotion }) => {
         <div className="day-feedback-container">
             < h3 > AI 감정 피드백</h3 >
             <Emotion emotioData={dayDiaryInfo?.emotionData} />
-            <p>{dayDiaryInfo?.Feedback}</p>
+            <p>{dayDiaryInfo?.detailed_emotion}</p>
         </div >
     );
 };

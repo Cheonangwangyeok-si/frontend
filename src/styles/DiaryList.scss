@@ -1,78 +1,41 @@
-.diary-summary-container {
+.diary-list{
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    position: relative;
-    top: -17px;
-    
-    #sort {
-        width: 131px;
-        height: 30px;
-        text-align: center;
-        color: #2343B5;
-        font-size: 16px;
-        margin-right: 16px;
-        margin-bottom: 13px;
-    }
-    
-    .diary-summary-list {
-        overflow-y: scroll;
-        height: 850px;
-    }
-    
-    .diary-summary{
+
+    .diary-box {
         cursor: pointer;
         box-sizing: border-box;
-        height: 160px;
-        width: 600px;
-        background-color: #E3EEFC;
         display: flex;
-        justify-content: space-between;
-        border-radius: 32px 32px 80px 32px;
-        padding: 28px 0px 31px 32px;
-        margin: 0px 16px 16px 16px;
+        align-items: center;
+        height: 120px;
+        width: 1000px;
+        padding: 21px 28px;
+        background-color: #E3EEFC;
+        border-radius: 32px;
+        margin-bottom: 16px;
 
-        .diary-summary-date{
-            font-size: 18px;
-            color: #818181;
-            margin-bottom: 24px;
-        }
-        .diary-summary-title{
-            font-size: 20px;
-            font-weight: bold;
-            color:#2343B5;
-        }
-        .diary-summary-sumContent{
-            font-size: 16px;
-            color:#2343B5;
+        .diary-emotion {
+            height: 64px;
+            width: 64px;
+            margin-right: 27px;
         }
 
-        .diary-summary-right{
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            margin-right: 30px;
+        .diary-content{
+            width: 700px;
 
-            .diary-summary-delete{
-                font-size: 14px;
-                color : #A8A8A8;
-                cursor: pointer;
-
-                &:hover{
-                    transition: 0.3s;
-                    color: #6f6f6f;
-                }
-            }
-            img{
-                width: 72px;
-                height: 72px;
-                margin-top: 5px;
+            p{
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
             }
         }
-        
-    }
 
-    p{
+        .diary-trash {
+            height: 24px;
+            width: 24px;
+            margin-left: 130px;
+        }
+    p,h3 {
         margin: 0;
+    }
     }
 }
