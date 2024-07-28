@@ -9,6 +9,13 @@ import Aboutimg from "./About.png";
 import num1 from "./1.png";
 import num2 from "./2.png";
 import num3 from "./3.png";
+import emoji from "./emoji.png";
+import notion from "./notion.png";
+import battery_low from "./battery-low.png";
+import entypo from "./entypo.png";
+import arrow from "./arrow.png";
+import right_bottom_square from "./오른쪽밑에뚫린사각형.png";
+import right_top_square from "./오른쪽위에뚫린사각형.png";
 const Home = () => {
   return (
     <div className="home">
@@ -33,34 +40,68 @@ const Home = () => {
             정도가 심해지면 건강을 심하게 해칠 수 있다.
           </p>
         </div>
-
         <div className="features">
           <div className="feature-item">
-            <div>
-              <img src={num1} />
+            <div className="feature-shape shape-top-right">
+              <img src={right_top_square} alt="Decorative shape top right" />
             </div>
-            <h2>기분의 저하나 의욕상실이 지속되고 있나요?</h2>
+            <div className="feature-number">
+              <img src={num1} alt="Number 1" />
+            </div>
+            <div className="feature-content">
+              <div className="feature-icon">
+                <img src={battery_low} alt="Battery low icon" />
+              </div>
+              <h3>기분의 저하나 의욕상실이 지속되고 있나요?</h3>
+              <p>
+                마음은 일시적으로 우울해질 수 있다. 그러나, 2주 이상 우울한
+                감정이 지속된다면, 이는 치료를 필요로 하는 상태다.
+              </p>
+            </div>
           </div>
           <div className="feature-item">
-            <div>
-              <img src={num2} />
+            <div className="feature-shape shape-bottom-right">
+              <img
+                src={right_bottom_square}
+                alt="Decorative shape bottom right"
+              />
             </div>
-            <h2>낮은 자신감, 저하된 삶의 의욕, 쉽게 느끼는 피로감</h2>
+            <div className="feature-number">
+              <img src={num2} alt="Number 2" />
+            </div>
+            <div className="feature-content">
+              <div className="feature-icon">
+                <img src={entypo} alt="Graph icon" />
+              </div>
+              <h3>낮은 자신감, 저하된 삶의 의욕, 쉽게 느끼는 피로감</h3>
+              <p>
+                우울증 환자들이 흔히 호소하는 증상은 정서적으로 우울하고 슬픈
+                느낌이다. 이런 증상은 보통 새벽과 아침 무렵에 나타난다.
+              </p>
+            </div>
           </div>
           <div className="feature-item">
-            <div>
-              {" "}
-              <img src={num3} />
+            <div className="feature-shape shape-top-right">
+              <img src={right_top_square} alt="Decorative shape top right" />
             </div>
-            <h2>건강하고 규칙적인 일상을 되찾는 것이 중요!</h2>
+            <div className="feature-number">
+              <img src={num3} alt="Number 3" />
+            </div>
+            <div className="feature-content">
+              <div className="feature-icon">
+                <img src={arrow} alt="Arrow icon" />
+              </div>
+              <h3>건강하고 규칙적인 일상을 되찾는 것이 중요!</h3>
+              <p>
+                누구에게나 찾아올 수 있는 마음의 병인만큼 우울증은 먼저 환자
+                스스로 벗어나려는 강한 의지가 요구된다.
+              </p>
+            </div>
           </div>
         </div>
 
         <div className="recovery-section">
-          <p>
-            HOW DO I RECOVER? HOW DO I RECOVER? HOW DO I RECOVER? HOW DO I
-            RECOVER? HOW DO I RECOVER? HOW DO I RECOVER?
-          </p>
+          <img src={emoji} alt="이모티콘" />"
         </div>
       </main>
 
@@ -129,11 +170,7 @@ const Home = () => {
             <p>ALL RIGHTS RESERVED 2024 © Cheonan Metropolitan City</p>
           </div>
           <div className="footer-image">
-            <img
-              src="/path-to-your-circular-image.png"
-              alt="Logo"
-              className="footer-logo"
-            />
+            <img src={notion} alt="Logo" className="footer-logo" />
           </div>
         </div>
       </footer>

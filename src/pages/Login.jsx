@@ -11,11 +11,9 @@ const Login = () => {
     console.log("Client ID:", process.env.REACT_APP_GOOGLE_CLIENT_ID);
   }, []);
 
-  const handleLoginSuccess = async (googleData) => {
+  const handleLoginSuccess = async () => {
     try {
-      const res = await axios.post("http://localhost:8080/api/google-login", {
-        token: googleData.tokenId,
-      });
+      const res = await axios.get("http://localhost:8080/api/v1/account/login");
 
       if (res.status === 200) {
         const { accessToken, refreshToken } = res.data;
