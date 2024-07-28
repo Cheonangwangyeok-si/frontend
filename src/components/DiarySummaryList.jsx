@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "../styles/DiarySummaryList.scss";
 
 function DiarySummaryList({ diaryData, setDummy, currentDate, setCurrentDate, setClickDay }) {
-  // 정렬 어떻게 할 지 물어보기
   const [sort, setSort] = useState("Asc");
 
   const handleClick = (date) => {

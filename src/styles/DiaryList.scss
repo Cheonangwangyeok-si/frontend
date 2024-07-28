@@ -1,3 +1,20 @@
+.diary-container{
+
+    .diary-check {
+        display: flex;
+        align-items: center;
+        img {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            
+            &:hover{
+                content: url('../images/DiaryViewImage/Trash.png');
+            }
+        }
+    }
+}
+
 .diary-list{
     display: flex;
 

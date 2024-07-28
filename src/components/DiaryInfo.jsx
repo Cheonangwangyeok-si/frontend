@@ -1,7 +1,6 @@
 import React from 'react';
 import '../styles/DiaryInfo.scss';
 
-
 const DiaryInfo = ({ id, dayDiaryInfo, setDummy, diaryData, setClickDay }) => {
 
     const onDelete = () => {

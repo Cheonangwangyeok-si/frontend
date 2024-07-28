@@ -1,8 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import "../styles/DiaryList.scss";
 import Trash from "../images/DiaryViewImage/Trash.png";
+import Trash1 from "../images/DiaryViewImage/Trash1.png";
+import HappyImage from "../images/Happy.png";
+import AngryImage from "../images/Angry.png";
+import SadImage from "../images/Sad.png";
+import SurprisedImage from "../images/Surprised.png";
+import BoringImage from "../images/Boring.png";
+
+const emotionTypes = {
+    [HappyImage]: 'happy',
+    [AngryImage]: 'angry',
+    [SadImage]: 'sad',
+    [SurprisedImage]: 'surprised',
+    [BoringImage]: 'boring'
+};
 
 const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActiveComponent }) => {
+    const [checkDiarys, setCheckDiarys] = useState([]);
+    const [search, setSearch] = useState('');
+    const [filterDiaryData, setFilterDiaryData] = useState([]);
+    const [sort, setSort] = useState("Recent");
+    const [filterEmotion, setFilterEmotion] = useState("default");
+
+    useEffect(() => {
+        let filteredData = diaryData.filter(diary =>
+            diary.title.includes(search) || diary.content.includes(search)
+        );
+
+        if (filterEmotion !== "default") {
+            filteredData = filteredData.filter(diary =>
+                emotionTypes[diary.emotion_type] === filterEmotion
+            );
+        }
+
+        filteredData.sort((a, b) => {
+            if (sort === "Recent") {
+                return new Date(b.date) - new Date(a.date);
+            } else {
+                return new Date(a.date) - new Date(b.date);
+            }
+        });
+
+        setFilterDiaryData(filteredData);
+        setCheckDiarys([]);
+    }, [search, filterEmotion, sort, diaryData]);
 
     const handleClick = (date) => {
         setCurrentDate(new Date(date));
@@ -16,18 +58,42 @@ const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActive
             item => item.date !== id
         );
         setDummy(nextDummy);
+        setCheckDiarys(prev => prev.filter((checkDate) => checkDate !== id))
+    }
+
+    const onDeleteCheck = () => {
+        const nextDummy = diaryData.filter(
+            diary => !(checkDiarys.includes(diary.date))
+        );
+        setDummy(nextDummy);
+        setCheckDiarys([]);
+    }
+
+    const onCheck = (id, e) => {
+        if (e.target.checked) {
+            setCheckDiarys(prev => [...prev, id])
+        } else {
+            setCheckDiarys(prev => prev.filter((element) => element !== id))
+        }
+    }
+
+    const onAllCheck = (e) => {
+        if (e.target.checked) {
+            const dateArr = [];
+            filterDiaryData.forEach(diary =>
+                dateArr.push(diary.date)
+            );
+            setCheckDiarys(dateArr);
+        } else {
+            setCheckDiarys([]);
+        }
     }
 
     return (
         <div className='diaryList-container'>
             <div className='sort-options'>
-                <input type="text" placeholder='검색' />
-                <select id="sortDate" className='sort-select'>
-                    <option value="" disabled selected>날짜</option>
-                    <option value="Asc">오름차순</option>
-                    <option value="Desc">내림차순</option>
-                </select>
-                <select id="sortEmotion" className='sort-select'>
+                <input type="text" placeholder='검색' value={search} onChange={(e) => { setSearch(e.target.value) }} />
+                <select id="sortEmotion" className='sort-select' value={filterEmotion} onChange={(e) => { setFilterEmotion(e.target.value) }}>
                     <option value="default">감정</option>
                     <option value="happy">행복</option>
                     <option value="angry">분노</option>
@@ -35,18 +101,28 @@ const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActive
                     <option value="surprised">놀람</option>
                     <option value="boring">중립</option>
                 </select>
-                <select id="sortRecent" className='sort-select'>
-                    <option value="recent">최신순</option>
-                    <option value="old">오래된순</option>
+                <select id="sortRecent" className='sort-select' value={sort} onChange={(e) => { setSort(e.target.value) }}>
+                    <option value="Recent">최신순</option>
+                    <option value="Old">오래된순</option>
                 </select>
             </div>
             <div className='diary-container'>
-                <div className='diary-check'></div>
+                <div className='diary-check'>
+                    <input type="checkbox" name="all-check"
+                        onChange={onAllCheck}
+                        checked={(checkDiarys.length === filterDiaryData.length) && filterDiaryData.length}
+                    />
+                    <p>{filterDiaryData.length}개의 감정 일기</p>
+                    <img src={Trash1} onClick={onDeleteCheck} />
+                </div>
                 <hr />
                 <div className='diary-lists'>
-                    {diaryData.map((diary) => (
+                    {filterDiaryData.map((diary) => (
                         <div className='diary-list'>
-                            <div>체크박스</div>
+                            <input type="checkbox"
+                                onChange={(e) => { onCheck(diary.date, e) }}
+                                checked={checkDiarys.includes(diary.date)}
+                            />
                             <div className='diary-box' onClick={() => { handleClick(diary.date) }}>
                                 <img className='diary-emotion' src={diary.emotion_type} />
                                 <div className='diary-content'>
