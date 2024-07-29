@@ -35,10 +35,13 @@ function DiarySummaryList({ diaryData, setDummy, currentDate, setCurrentDate, se
 
   return (
     <div className="diary-summary-container">
-      <select id="listSort" value={sort} onChange={onChange}>
-        <option value="Asc">날짜 오름차순</option>
-        <option value="Desc">날짜 내림차순</option>
-      </select>
+
+      <label name="listSort" className="sort-select">날짜
+        <select id="listSort" value={sort} onChange={onChange}>
+          <option value="Asc">오름차순</option>
+          <option value="Desc">내림차순</option>
+        </select>
+      </label>
       <div className="diary-summary-list">
         {diaryData.map((diary) => {
           return parseInt(diary.date.split('-')[1], 10) === currentDate.getMonth() + 1 ? (

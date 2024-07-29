@@ -1,8 +1,15 @@
-.diary-container{
+.diary-container1{
 
     .diary-check {
         display: flex;
         align-items: center;
+        
+        p{
+            font-size: 14px;
+            color: #2343B5;
+            margin:0px 830px 0px 0px;
+        }
+
         img {
             width: 24px;
             height: 24px;
@@ -13,46 +20,128 @@
             }
         }
     }
-}
 
-.diary-list{
-    display: flex;
-
-    .diary-box {
+    .checkbox{
+        appearance: none;
         cursor: pointer;
-        box-sizing: border-box;
-        display: flex;
-        align-items: center;
-        height: 120px;
-        width: 1000px;
-        padding: 21px 28px;
-        background-color: #E3EEFC;
-        border-radius: 32px;
-        margin-bottom: 16px;
-
-        .diary-emotion {
-            height: 64px;
-            width: 64px;
-            margin-right: 27px;
-        }
-
-        .diary-content{
-            width: 700px;
-
-            p{
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
+        width: 20px;
+        height: 20px;
+        border: 1px solid #2343B5;
+        border-radius: 4px;
+        transition: 0.1s;
+        margin: 0px 40px 0px 0px;
+        position: relative;
+        
+        &:checked{
+            background-color:#2343B5 ;
+            &::after{
+                content: '';
+                position: absolute;
+                left: 6px;
+                top: 1px;
+                width: 5px;
+                height: 10px;
+                border: solid white;
+                border-width: 0 2px 2px 0;
+                transform: rotate(45deg);
             }
         }
-
-        .diary-trash {
-            height: 24px;
-            width: 24px;
-            margin-left: 130px;
-        }
-    p,h3 {
-        margin: 0;
     }
+
+    hr {
+        margin: 11px 0px 21px 0px;
+        opacity: 0.4;
+        width: 115%;
     }
 }
+
+.diary-lists{
+    overflow-y: scroll;
+    height: 83vh;
+
+    &::-webkit-scrollbar{
+        display: none;
+    }
+    
+    .diary-list{
+        display: flex;
+        align-items: center;
+        
+        .diary-box {
+            cursor: pointer;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            height: 120px;
+            width: 1000px;
+            padding: 21px 28px;
+            background-color: #E3EEFC;
+            border-radius: 32px;
+            margin:8px 0px 8px;
+            
+            .diary-emotion {
+                height: 64px;
+                width: 64px;
+                margin-right: 27px;
+            }
+            
+            .diary-contentbox{
+                width: 700px;
+                height: 78px;
+                
+                h3 {
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    color: #2343B5;
+                    font-size: 16px;
+                    line-height: 22px;
+                }
+                
+                p{
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    font-size: 14px;
+                    line-height: 20px;
+                }
+                
+                .diary-content {
+                    color: #2343B5;
+                }
+                
+                .diary-date-short{
+                    color: #818181;
+                    margin-top: 14px;
+                }
+            }
+            
+            .diary-trash {
+                height: 24px;
+                width: 24px;
+                margin-left: 110px;
+            }
+            p,h3 {
+                margin: 0;
+            }
+        }
+    }
+}
+
+
+.sort-options{
+    margin: 28px 0px 39px 0px;
+
+    .sort-select{
+        color:#2343B5;
+        font-weight: 600;
+        text-align: center;
+        height: 34px;
+        width: 78px;
+        border-radius: 8px;
+        border:none;
+        margin-left:16px;
+        font-size: 16px;
+    }
+}
+

@@ -5,19 +5,29 @@
     position: relative;
     top: -17px;
     
-    #listSort {
-        width: 131px;
-        height: 30px;
-        text-align: center;
+    .sort-select{
         color: #2343B5;
-        font-size: 16px;
-        margin-right: 16px;
-        margin-bottom: 13px;
+        
+        #listSort {
+            color: #2343B5;
+            height: 30px;
+            text-align: center;
+            margin-right: 16px;
+            margin-bottom: 13px;
+            font-size: 16px;
+            border:none;
+            background-color: #f5f4f7;
+        }
     }
+    
     
     .diary-summary-list {
         overflow-y: scroll;
         height: 850px;
+
+        &::-webkit-scrollbar{
+            display: none;
+        }
     }
     
     .diary-summary-content{
@@ -38,13 +48,21 @@
             margin-bottom: 24px;
         }
         .diary-summary-title{
+            width: 450px;
             font-size: 20px;
             font-weight: bold;
             color:#2343B5;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
         .diary-summary-sumContent{
+            width: 450px;
             font-size: 16px;
             color:#2343B5;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
 
         .diary-summary-right{

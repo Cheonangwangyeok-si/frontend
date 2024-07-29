@@ -106,9 +106,9 @@ const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActive
                     <option value="Old">오래된순</option>
                 </select>
             </div>
-            <div className='diary-container'>
+            <div className='diary-container1'>
                 <div className='diary-check'>
-                    <input type="checkbox" name="all-check"
+                    <input type="checkbox" className='checkbox'
                         onChange={onAllCheck}
                         checked={(checkDiarys.length === filterDiaryData.length) && filterDiaryData.length}
                     />
@@ -119,16 +119,16 @@ const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActive
                 <div className='diary-lists'>
                     {filterDiaryData.map((diary) => (
                         <div className='diary-list'>
-                            <input type="checkbox"
+                            <input type="checkbox" className='checkbox'
                                 onChange={(e) => { onCheck(diary.date, e) }}
                                 checked={checkDiarys.includes(diary.date)}
                             />
                             <div className='diary-box' onClick={() => { handleClick(diary.date) }}>
                                 <img className='diary-emotion' src={diary.emotion_type} />
-                                <div className='diary-content'>
+                                <div className='diary-contentbox'>
                                     <h3>{diary.title}</h3>
-                                    <p>{diary.content}</p>
-                                    <p>{diary.date.replace(/-/g, '.')} <b>·</b> {diary.short_emotion}</p>
+                                    <p className='diary-content'>{diary.content}</p>
+                                    <p className='diary-date-short'>{diary.date.replace(/-/g, '.')} <b>·</b> {diary.short_emotion}</p>
                                 </div>
                                 <img className='diary-trash' src={Trash} onClick={(e) => { onDelete(diary.date, e) }} />
                             </div>

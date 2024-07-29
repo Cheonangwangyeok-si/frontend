@@ -4,4 +4,25 @@
     background-color: #FFFFFF;
     border-radius: 32px;
     padding: 24px 32px;
+
+    .day-feedback-title{
+        color: #2353B5;
+    }
+
+    .day-feedback-detailed_emotion{
+        color: #818181;
+        font-size: 14px;
+        line-height: 25px;
+        height: 200px;
+        overflow-y: scroll;
+        
+
+        &::-webkit-scrollbar{
+            display: none;
+        }
+    }
+
+    p{
+        margin: 0;
+    }
 }

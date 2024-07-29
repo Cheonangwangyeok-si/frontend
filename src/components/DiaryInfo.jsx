@@ -14,11 +14,11 @@ const DiaryInfo = ({ id, dayDiaryInfo, setDummy, diaryData, setClickDay }) => {
     return (
         <div className='dayDiary-container'>
             <div className='dayDiary-date'>{id.replace(/-/g, '.')}</div>
-            <div>{dayDiaryInfo?.title}</div>
-            <div>{dayDiaryInfo?.short_emotion}</div>
-            <div>{dayDiaryInfo?.content}</div>
-            <img src={dayDiaryInfo?.emotion_type} />
-            <button onClick={onDelete}>삭제</button>
+            <div className='dayDiary-title'>{dayDiaryInfo?.title}</div>
+            <div className='dayDiary-short_emotion'>{dayDiaryInfo?.short_emotion}</div>
+            <div className='dayDiary-content'>{dayDiaryInfo?.content}</div>
+            <img className='dayDiary-img' src={dayDiaryInfo?.emotion_type} />
+            <button className='dayDiary-delete' onClick={onDelete} >삭제</button>
         </div >
     );
 };
