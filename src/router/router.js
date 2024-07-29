@@ -3,6 +3,7 @@ import React from "react";
 import Home from "../pages/Home/Home";
 import AnalyzeView from "../pages/AnalyzeView";
 import DiaryView from "../pages/DiaryView";
+import DiaryView2 from "../pages/DiaryView2";
 import Layout from "../layout/Layout";
 
 const router = createBrowserRouter([
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
       },
       {
         path: "diary",
-        element: <DiaryView />,
+        element: <DiaryView2 />,
       },
     ],
   },
