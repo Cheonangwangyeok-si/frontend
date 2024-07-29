@@ -70,55 +70,25 @@ const AnalyzeView = () => {
             <div className="calendar-title">주간 감정 피드백</div>
             <div className="emotion-container">
               <Emotion
-                emotionData={[
-                  {
-                    emotionName: "행복",
-                    emotionSrc: HappyImage,
-                    percent: "47%",
-                  },
-                ]}
-                type="weekly"
-                setEmotion={undefined}
+                emotionName="행복"
+                emotionSrc={HappyImage}
+                percent="47%"
               />
               <Emotion
-                emotionData={[
-                  {
-                    emotionName: "분노",
-                    emotionSrc: AngryImage,
-                    percent: "3%",
-                  },
-                ]}
-                type="weekly"
-                setEmotion={undefined}
+                emotionName="분노"
+                emotionSrc={AngryImage}
+                percent="3%"
+              />
+              <Emotion emotionName="슬픔" emotionSrc={SadImage} percent="20%" />
+              <Emotion
+                emotionName="놀람"
+                emotionSrc={SurprisedImage}
+                percent="0%"
               />
               <Emotion
-                emotionData={[
-                  { emotionName: "슬픔", emotionSrc: SadImage, percent: "20%" },
-                ]}
-                type="weekly"
-                setEmotion={undefined}
-              />
-              <Emotion
-                emotionData={[
-                  {
-                    emotionName: "놀람",
-                    emotionSrc: SurprisedImage,
-                    percent: "0%",
-                  },
-                ]}
-                type="weekly"
-                setEmotion={undefined}
-              />
-              <Emotion
-                emotionData={[
-                  {
-                    emotionName: "중립",
-                    emotionSrc: BoringImage,
-                    percent: "30%",
-                  },
-                ]}
-                type="weekly"
-                setEmotion={undefined}
+                emotionName="중립"
+                emotionSrc={BoringImage}
+                percent="30%"
               />
             </div>
             <p>{feedbackData}</p>

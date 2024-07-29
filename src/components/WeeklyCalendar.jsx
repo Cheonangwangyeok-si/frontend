@@ -10,6 +10,8 @@ const WeeklyCalendar = ({
   currentDate,
   setCurrentDate,
   getYearMonthDay,
+  setClickDay,
+  clickDay,
 }) => {
   const day = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
   const monthNames = [
@@ -105,6 +107,8 @@ const WeeklyCalendar = ({
             setCurrentDate={setCurrentDate}
             currentDate={currentDate}
             getYearMonthDay={getYearMonthDay}
+            setClickDay={setClickDay}
+            clickDay={clickDay}
           />
         ))}
       </div>

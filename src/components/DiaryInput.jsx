@@ -1,44 +1,41 @@
-import React, { useEffect, useState } from "react";
-import DatePicker from "react-datepicker";
-import { addDays, startOfWeek, endOfWeek } from "date-fns";
-import "react-datepicker/dist/react-datepicker.css";
-import "../styles/DiaryInput.scss";
+import React, { useEffect, useState } from 'react';
+import '../styles/DiaryInput.scss';
 
 const DiaryInput = ({ setDummy, dummy, id }) => {
-  // const [content, setContent] = useState('');
+    const [content, setContent] = useState('');
 
-  // const onChange = e => {
-  //     setContent(e.target.value);
-  // }
+    const onChange = e => {
+        setContent(e.target.value);
+    }
 
-  // const onClick = e => {
-  //     e.preventDefault();
-  //     if (content === '') {
-  //         alert('내용을 입력해주세요');
-  //     } else {
-  //         const inputData = {
-  //             date: id,
-  //             content: content,
-  //         };
-  //         const nextDummy = [...dummy, inputData];
-  //         setDummy(nextDummy);
-  //         setContent('');
-  //     }
-  // }
+    const onClick = e => {
+        e.preventDefault();
+        if (content === '') {
+            alert('내용을 입력해주세요');
+        } else {
+            const inputData = {
+                date: id,
+                content: content,
+            };
+            const nextDummy = [...dummy, inputData];
+            setDummy(nextDummy);
+            setContent('');
+        }
+    }
 
-  // useEffect(() => {
-  //     setContent('');
-  // }, [id]);
+    useEffect(() => {
+        setContent('');
+    }, [id]);
 
-  // return (
-  //     <div className='diaryInput'>
-  //         {id} 일기
-  //         <form onSubmit={onClick}>
-  //             <input name='content' value={content} onChange={onChange} />
-  //             <button type='submit'>작성</button>
-  //         </form>
-  //     </div>
-  // );
+    return (
+        <div className='diaryInput'>
+            {id} 일기
+            <form onSubmit={onClick}>
+                <input name='content' value={content} onChange={onChange} />
+                <button type='submit'>작성</button>
+            </form>
+        </div>
+    );
 };
 
 export default DiaryInput;

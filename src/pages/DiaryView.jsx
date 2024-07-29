@@ -18,7 +18,8 @@ import SadImage from "../images/Sad.png";
 import SurprisedImage from "../images/Surprised.png";
 import BoringImage from "../images/Boring.png";
 import DayFeedback from "../components/DayFeedback";
-
+import DateSelect from "../components/DateSelect";
+import InputForm from "../components/InputForm";
 
 const CalendarView = () => {
   // 받아올 일기 정보들
@@ -29,7 +30,7 @@ const CalendarView = () => {
       content: "진짜 아주 긴 내용1",
       short_emotion: "한 줄 감정 결과1",
       emotion_type: HappyImage,
-      detailed_emotion: '6월 1일의 피드백 내용',
+      detailed_emotion: "6월 1일의 피드백 내용",
       emotionData: [
         {
           emotion: "행복",
@@ -61,10 +62,11 @@ const CalendarView = () => {
     {
       date: "2024-06-16",
       title: "여름의 한가운데에서 느낀 분노",
-      content: "오늘은 정말 더운 여름날이었다. 아침부터 찌는 듯한 더위에 잠에서 깼다. 요즘 날씨가 너무 더워서 에어컨 없이는 버틸 수가 없다. 오전에는 집 근처 카페에 가서 일을 했다. 카페에서 마신 아이스 아메리카노가 시원하고 달콤해서 기분이 좋았다. 카페에서 일하는 동안 생각보다 많은 일을 끝내서 뿌듯했다. 점심으로는 친구와 약속이 있어서 만났는데, 오랜만에 만나서 그런지 수다를 떨다 보니 시간이 금방 갔다. 친구와의 대화는 항상 큰 위안이 된다. 서로의 고민도 나누고, 웃고 떠들면서 한결 마음이 가벼워졌다. 저녁은 집에서 샐러드와 닭가슴살로 간단히 해결했다. 식사 후에는 좋아하는 드라마를 보며 하루를 마무리했다. 드라마를 보면서 잠시나마 현실에서 벗어날 수 있어서 좋았다. 오늘 하루를 이렇게 일기로 쓰면서 정리하니 마음이 한결 가벼워진다.",
+      content:
+        "오늘은 정말 더운 여름날이었다. 아침부터 찌는 듯한 더위에 잠에서 깼다. 요즘 날씨가 너무 더워서 에어컨 없이는 버틸 수가 없다. 오전에는 집 근처 카페에 가서 일을 했다. 카페에서 마신 아이스 아메리카노가 시원하고 달콤해서 기분이 좋았다. 카페에서 일하는 동안 생각보다 많은 일을 끝내서 뿌듯했다. 점심으로는 친구와 약속이 있어서 만났는데, 오랜만에 만나서 그런지 수다를 떨다 보니 시간이 금방 갔다. 친구와의 대화는 항상 큰 위안이 된다. 서로의 고민도 나누고, 웃고 떠들면서 한결 마음이 가벼워졌다. 저녁은 집에서 샐러드와 닭가슴살로 간단히 해결했다. 식사 후에는 좋아하는 드라마를 보며 하루를 마무리했다. 드라마를 보면서 잠시나마 현실에서 벗어날 수 있어서 좋았다. 오늘 하루를 이렇게 일기로 쓰면서 정리하니 마음이 한결 가벼워진다.",
       short_emotion: "한 줄 감정 결과2",
       emotion_type: HappyImage,
-      detailed_emotion: '6월 16일의 피드백 내용',
+      detailed_emotion: "6월 16일의 피드백 내용",
       emotionData: [
         {
           emotion: "행복",
@@ -99,7 +101,7 @@ const CalendarView = () => {
       content: "진짜 아주 긴 내용3",
       short_emotion: "한 줄 감정 결과3",
       emotion_type: HappyImage,
-      detailed_emotion: '7월 17일의 피드백 내용',
+      detailed_emotion: "7월 17일의 피드백 내용",
       emotionData: [
         {
           emotion: "행복",
@@ -134,7 +136,7 @@ const CalendarView = () => {
       content: "진짜 아주 긴 내용4",
       short_emotion: "한 줄 감정 결과4",
       emotion_type: SurprisedImage,
-      detailed_emotion: '7월 20일의 피드백 내용',
+      detailed_emotion: "7월 20일의 피드백 내용",
       emotionData: [
         {
           emotion: "행복",
@@ -169,7 +171,7 @@ const CalendarView = () => {
       content: "진짜 아주 긴 내용5",
       short_emotion: "한 줄 감정 결과5",
       emotion_type: BoringImage,
-      detailed_emotion: '7월 27일의 피드백 내용',
+      detailed_emotion: "7월 27일의 피드백 내용",
       emotionData: [
         {
           emotion: "행복",
@@ -256,6 +258,10 @@ const CalendarView = () => {
   const [activeComponent, setActiveComponent] = useState("calendar");
   const [clickDay, setClickDay] = useState(false);
 
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [emotion, setEmotion] = useState("");
+
   const getYearMonthDay = useCallback((date) => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -338,7 +344,7 @@ const CalendarView = () => {
               viewMode={"month"}
             />
 
-            {eventBool && clickDay ?
+            {eventBool && clickDay ? (
               <div className="dayDiaryInfo-container">
                 <DiaryInfo
                   id={id}
@@ -347,12 +353,9 @@ const CalendarView = () => {
                   setClickDay={setClickDay}
                   dayDiaryInfo={checkEvent(id)} // 하루 일기 정보
                 />
-                <DayFeedback
-                  dayDiaryInfo={checkEvent(id)}
-                  Emotion={Emotion}
-                />
+                <DayFeedback dayDiaryInfo={checkEvent(id)} Emotion={Emotion} />
               </div>
-              :
+            ) : (
               <DiarySummaryList
                 diaryData={dummy}
                 setDummy={setDummy}
@@ -360,7 +363,7 @@ const CalendarView = () => {
                 currentDate={currentDate}
                 setCurrentDate={setCurrentDate}
               />
-            }
+            )}
           </div>
         </div>
       )}
@@ -400,7 +403,7 @@ const CalendarView = () => {
               </div>
               <div className="feedback-content">
                 <div className="feedback-title">주간 감정 피드백</div>
-                <Emotion emotioData={emotionData} type="weekly" setEmotion={undefined}/>
+                <Emotion emotionData={emotionData} type="weekly" />
                 <p>{feedbackData}</p>
               </div>
             </div>
@@ -409,10 +412,39 @@ const CalendarView = () => {
       )}
 
       {activeComponent === "diaryInput" && (
-        // 감정 일기 작성하기 부분
         <div className="main-container">
           <h1>WRITE AN EMOTIONAL DIARY</h1>
-          <DiaryInput id={id} dummy={dummy} setDummy={setDummy} />
+          <DateSelect
+            currentDate={currentDate}
+            setCurrentDate={setCurrentDate}
+          />
+          <label>오늘의 감정</label>
+          <Emotion
+            emotionData={emotionData}
+            type="input"
+            setEmotion={setEmotion}
+          />
+          <InputForm
+            label="제목"
+            placeholder="제목을 입력해주세요."
+            value={title}
+            setValue={setTitle}
+          />
+          <InputForm
+            label="내용"
+            placeholder="내용을 입력해주세요."
+            value={content}
+            setValue={setContent}
+          />
+
+          <button
+            className="submit-button"
+            onClick={() =>
+              console.log({ currentDate, emotion, title, content })
+            }
+          >
+            일기 작성 완료
+          </button>
         </div>
       )}
     </div>
