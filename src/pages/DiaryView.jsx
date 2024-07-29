@@ -403,7 +403,7 @@ const CalendarView = () => {
               </div>
               <div className="feedback-content">
                 <div className="feedback-title">주간 감정 피드백</div>
-                <Emotion emotionData={emotionData} type="weekly" />
+                <Emotion emotioData={emotionData} type="weekly" setEmotion={undefined}/>
                 <p>{feedbackData}</p>
               </div>
             </div>

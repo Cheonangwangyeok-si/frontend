@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/Emotion.scss";
+import { da } from "date-fns/locale";
 
 function Emotion({ emotionData, type, setEmotion }) {
   return (

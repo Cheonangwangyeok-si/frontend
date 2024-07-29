@@ -20,7 +20,7 @@ const router = createBrowserRouter([
       },
       {
         path: "diary",
-        element: <DiaryView />,
+        element: <DiaryView2 />,
       },
     ],
   },
