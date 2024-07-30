@@ -28,7 +28,7 @@ const Day = ({ day, event, id, currentDate, setCurrentDate, getYearMonthDay, set
             {day.getDate()}
             <div
                 className={`${event ? 'event' : ''}`}
-                style={{ backgroundColor: emotionColors[event?.emotion_type] }}
+                style={{ backgroundColor: emotionColors[event?.emotionType] }}
             ></div>
         </div>
     );

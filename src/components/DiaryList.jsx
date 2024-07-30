@@ -30,15 +30,15 @@ const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActive
 
         if (filterEmotion !== "default") {
             filteredData = filteredData.filter(diary =>
-                emotionTypes[diary.emotion_type] === filterEmotion
+                emotionTypes[diary.emotionType] === filterEmotion
             );
         }
 
         filteredData.sort((a, b) => {
             if (sort === "Recent") {
-                return new Date(b.date) - new Date(a.date);
+                return new Date(b.dateAt) - new Date(a.dateAt);
             } else {
-                return new Date(a.date) - new Date(b.date);
+                return new Date(a.dateAt) - new Date(b.dateAt);
             }
         });
 
@@ -55,7 +55,7 @@ const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActive
     const onDelete = (id, e) => {
         e.stopPropagation();
         const nextDummy = diaryData.filter(
-            item => item.date !== id
+            item => item.dateAt !== id
         );
         setDummy(nextDummy);
         setCheckDiarys(prev => prev.filter((checkDate) => checkDate !== id))
@@ -63,7 +63,7 @@ const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActive
 
     const onDeleteCheck = () => {
         const nextDummy = diaryData.filter(
-            diary => !(checkDiarys.includes(diary.date))
+            diary => !(checkDiarys.includes(diary.dateAt))
         );
         setDummy(nextDummy);
         setCheckDiarys([]);
@@ -81,7 +81,7 @@ const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActive
         if (e.target.checked) {
             const dateArr = [];
             filterDiaryData.forEach(diary =>
-                dateArr.push(diary.date)
+                dateArr.push(diary.dateAt)
             );
             setCheckDiarys(dateArr);
         } else {
@@ -120,19 +120,19 @@ const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActive
                     {filterDiaryData.map((diary) => (
                         <div className='diary-list'>
                             <input type="checkbox" className='checkbox'
-                                onChange={(e) => { onCheck(diary.date, e) }}
-                                checked={checkDiarys.includes(diary.date)}
+                                onChange={(e) => { onCheck(diary.dateAt, e) }}
+                                checked={checkDiarys.includes(diary.dateAt)}
                             />
-                            <div className='diary-box' onClick={() => { handleClick(diary.date) }}>
+                            <div className='diary-box' onClick={() => { handleClick(diary.dateAt) }}>
                                 <div className='diary-ec'>
-                                    <img className='diary-emotion' src={diary.emotion_type} />
+                                    <img className='diary-emotion' src={diary.emotionType} />
                                     <div className='diary-contentbox'>
                                         <h3>{diary.title}</h3>
                                         <p className='diary-content'>{diary.content}</p>
-                                        <p className='diary-date-short'>{diary.date.replace(/-/g, '.')} <b>·</b> {diary.short_emotion}</p>
+                                        <p className='diary-date-short'>{diary.dateAt.replace(/-/g, '.')} <b>·</b> {diary.shortFeedback}</p>
                                     </div>
                                 </div>
-                                <img className='diary-trash' src={Trash} onClick={(e) => { onDelete(diary.date, e) }} />
+                                <img className='diary-trash' src={Trash} onClick={(e) => { onDelete(diary.dateAt, e) }} />
                             </div>
                         </div>
                     ))}
