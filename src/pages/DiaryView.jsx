@@ -202,22 +202,20 @@ const CalendarView = () => {
     },
   ]);
   const [thisweekData, setThisweekData] = useState([
-    { id: "기쁨", label: "기쁨", value: 20 },
-    { id: "슬픔", label: "슬픔", value: 10 },
-    { id: "분노", label: "분노", value: 25 },
-    { id: "두려움", label: "두려움", value: 5 },
-    { id: "혐오", label: "혐오", value: 10 },
-    { id: "놀람", label: "놀람", value: 30 },
+    { id: "Happy", label: "기쁨", value: 50, color: "#FFE75C"},
+    { id: "Sad", label: "슬픔", value: 20, color: "#3293D7" },
+    { id: "Angry", label: "분노", value: 5, color: "#FF6262" },
+    { id: "Surprised", label: "놀람", value: 15, color: "#FEBB00" },
+    { id: "Boring", label: "중립", value: 10, color: "#C6C6C6" },
   ]);
 
   // 지난 주 감정 데이터(더미)
   const [lastweekData, setLastweekData] = useState([
-    { id: "기쁨", label: "기쁨", value: 30 },
-    { id: "슬픔", label: "슬픔", value: 20 },
-    { id: "분노", label: "분노", value: 15 },
-    { id: "두려움", label: "두려움", value: 10 },
-    { id: "혐오", label: "혐오", value: 5 },
-    { id: "놀람", label: "놀람", value: 20 },
+    { id: "Happy", label: "기쁨", value: 30, color: "#FFE75C"},
+    { id: "Sad", label: "슬픔", value: 2, color: "#3293D7" },
+    { id: "Angry", label: "분노", value: 15, color: "#FF6262" },
+    { id: "Surprised", label: "놀람", value: 5, color: "#FEBB00" },
+    { id: "Boring", label: "중립", value: 20, color: "#C6C6C6" },
   ]);
 
   // 감정 데이터
