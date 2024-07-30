@@ -1,25 +1,28 @@
 .diary-summary-container {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
     position: relative;
     top: -17px;
-    
+    width: 100%;
+    max-width: 600px;
+    margin-left: 16px;
+
     .sort-select{
         color: #2343B5;
-        
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-bottom: 13px;
+
         #listSort {
             color: #2343B5;
             height: 30px;
             text-align: center;
-            margin-right: 16px;
-            margin-bottom: 13px;
             font-size: 16px;
             border:none;
             background-color: #f5f4f7;
         }
     }
-    
     
     .diary-summary-list {
         overflow-y: scroll;
@@ -33,38 +36,38 @@
     .diary-summary-content{
         cursor: pointer;
         box-sizing: border-box;
-        height: 160px;
-        width: 600px;
         background-color: #E3EEFC;
         display: flex;
         justify-content: space-between;
         border-radius: 32px 32px 80px 32px;
         padding: 28px 0px 31px 32px;
-        margin: 0px 16px 16px 16px;
+        margin-bottom: 16px;
 
-        .diary-summary-date{
-            font-size: 18px;
-            color: #818181;
-            margin-bottom: 24px;
-        }
-        .diary-summary-title{
-            width: 450px;
-            font-size: 20px;
-            font-weight: bold;
-            color:#2343B5;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
-        .diary-summary-sumContent{
-            width: 450px;
-            font-size: 16px;
-            color:#2343B5;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
+        .diary-summary-test{
+            width: 80%;
 
+            .diary-summary-date{
+                font-size: 18px;
+                color: #818181;
+                margin-bottom: 24px;
+            }
+            .diary-summary-title{
+                font-size: 20px;
+                font-weight: bold;
+                color:#2343B5;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            .diary-summary-sumContent{
+                font-size: 16px;
+                color:#2343B5;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+    
+        }
         .diary-summary-right{
             display: flex;
             flex-direction: column;
@@ -87,7 +90,6 @@
                 margin-top: 5px;
             }
         }
-        
     }
 
     p{

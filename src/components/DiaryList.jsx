@@ -124,11 +124,13 @@ const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActive
                                 checked={checkDiarys.includes(diary.date)}
                             />
                             <div className='diary-box' onClick={() => { handleClick(diary.date) }}>
-                                <img className='diary-emotion' src={diary.emotion_type} />
-                                <div className='diary-contentbox'>
-                                    <h3>{diary.title}</h3>
-                                    <p className='diary-content'>{diary.content}</p>
-                                    <p className='diary-date-short'>{diary.date.replace(/-/g, '.')} <b>·</b> {diary.short_emotion}</p>
+                                <div className='diary-ec'>
+                                    <img className='diary-emotion' src={diary.emotion_type} />
+                                    <div className='diary-contentbox'>
+                                        <h3>{diary.title}</h3>
+                                        <p className='diary-content'>{diary.content}</p>
+                                        <p className='diary-date-short'>{diary.date.replace(/-/g, '.')} <b>·</b> {diary.short_emotion}</p>
+                                    </div>
                                 </div>
                                 <img className='diary-trash' src={Trash} onClick={(e) => { onDelete(diary.date, e) }} />
                             </div>

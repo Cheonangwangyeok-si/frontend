@@ -46,7 +46,7 @@ function DiarySummaryList({ diaryData, setDummy, currentDate, setCurrentDate, se
         {diaryData.map((diary) => {
           return parseInt(diary.date.split('-')[1], 10) === currentDate.getMonth() + 1 ? (
             <div key={diary.date} className="diary-summary-content" onClick={() => handleClick(diary.date)}>
-              <div>
+              <div className="diary-summary-test">
                 <p className="diary-summary-date">{diary.date.replace(/-/g, '.')}</p>
                 <p className="diary-summary-title">{diary.title}</p>
                 <p className="diary-summary-sumContent">{diary.short_emotion}</p>

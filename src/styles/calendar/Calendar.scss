@@ -3,19 +3,20 @@
     border: 2px solid #2353b5;
     background: white;
     text-align: center;
-    padding: 40px;
+    padding:  40px 72px 20px 72px;
     border-radius: 32px;
     margin-top: 26px;
-    width: 828px;
     height: 100%;
+    width: 100%;
+    max-width: 828px;
+    max-height: 784px;
+    aspect-ratio: 1;
 
     .calendar-header{
         display: flex;
         color :#2353b5;
         font-size: 32px;
         font-weight: 600;
-        height: 62px;
-        padding: 0px 32px;
         justify-content: space-between;
         align-items: center;
 
@@ -29,15 +30,15 @@
      .calendar-weeks {
         display: flex;
         color: #2353b5;
-        padding: 40px 33px;
-        justify-content: space-between;
+        justify-content: space-around;
         font-weight: bolder;
+        margin: 40px auto;
      }
 
      .calendar-days {
          display: grid;
          grid-template-columns: repeat(7, 1fr);
-         gap: 8px;
+         row-gap: 10px;
      }
 }
 
