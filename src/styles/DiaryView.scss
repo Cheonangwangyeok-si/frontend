@@ -108,12 +108,19 @@
 }
 
 .feedback-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   width: 748px;
   height: 446px;
+  gap: 20px;
   background-color: #e3eefc;
   border-radius: 32px;
   white-space: pre-wrap;
   font-size: 14px;
   color: #818181;
   margin: 32px 24px;
+  padding: 24px;
+  box-sizing: border-box;
 }

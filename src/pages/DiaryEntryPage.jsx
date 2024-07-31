@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DateSelect from "../components/DateSelect";
 import Emotion from "../components/Emotion";
 import HappyImage from "../images/Happy.png";
@@ -6,11 +6,25 @@ import AngryImage from "../images/Angry.png";
 import SadImage from "../images/Sad.png";
 import SurprisedImage from "../images/Surprised.png";
 import BoringImage from "../images/Boring.png";
+import SelectHappyImage from "../images/Select_Happy.png";
+import SelectAngryImage from "../images/Select_Angry.png";
+import SelectSadImage from "../images/Select_Sad.png";
+import SelectSurprisedImage from "../images/Select_Surprised.png";
+import SelectBoringImage from "../images/Select_Boring.png";
 import InputForm from "../components/InputForm";
+import "../styles/DiaryEntryPage.scss";
 
 const DiaryEntryPage = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   // 감정 데이터
+  const emotionImages = {
+    행복: { normal: HappyImage, selected: SelectHappyImage },
+    분노: { normal: AngryImage, selected: SelectAngryImage },
+    슬픔: { normal: SadImage, selected: SelectSadImage },
+    놀람: { normal: SurprisedImage, selected: SelectSurprisedImage },
+    중립: { normal: BoringImage, selected: SelectBoringImage },
+  };
+
   const [emotionData, setEmotionData] = useState([
     {
       emotion: "행복",
@@ -38,16 +52,55 @@ const DiaryEntryPage = () => {
       src: BoringImage,
     },
   ]);
-  const [emotion, setEmotion] = useState("");
+  const [selectEmotion, setSelectEmotion] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
+  const checkEmotion = (emotion) => {
+    return emotionImages[emotion]?.selected || "";
+  };
+
+  useEffect(() => {
+    setEmotionData(
+      emotionData.map((data) => {
+        if (data.emotion === selectEmotion) {
+          return {
+            ...data,
+            src: checkEmotion(data.emotion),
+          };
+        }
+        return {
+          ...data,
+          src: emotionImages[data.emotion].normal,
+        };
+      })
+    );
+  }, [selectEmotion]);
+
   return (
-    <div className="main-container">
-      <h1>WRITE AN EMOTIONAL DIARY</h1>
-      <DateSelect currentDate={currentDate} setCurrentDate={setCurrentDate} />
-      <label>오늘의 감정</label>
-      <Emotion emotionData={emotionData} type="input" setEmotion={setEmotion} />
+    <div className="main-container" style={{ width: "1063px" }}>
+      <div className="title">
+        <h1>WRITE AN EMOTIONAL DIARY</h1>
+        <button
+          className="submit-button"
+          onClick={() =>
+            console.log({ currentDate, selectEmotion, title, content })
+          }
+        >
+          일기 작성 완료
+        </button>
+      </div>
+      <div className="top-content">
+        <DateSelect currentDate={currentDate} setCurrentDate={setCurrentDate} />
+        <div className="emotion">
+          <label>오늘의 감정</label>
+          <Emotion
+            emotionData={emotionData}
+            type="input"
+            setEmotion={setSelectEmotion}
+          />
+        </div>
+      </div>
       <InputForm
         label="제목"
         placeholder="제목을 입력해주세요."
@@ -60,13 +113,6 @@ const DiaryEntryPage = () => {
         value={content}
         setValue={setContent}
       />
-
-      <button
-        className="submit-button"
-        onClick={() => console.log({ currentDate, emotion, title, content })}
-      >
-        일기 작성 완료
-      </button>
     </div>
   );
 };

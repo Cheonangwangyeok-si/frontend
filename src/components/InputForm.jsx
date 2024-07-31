@@ -4,7 +4,7 @@ const InputForm = ({label, placeholder, value, setValue}) => {
   return (
     <div className="form-group">
       <label>{label}</label>
-      <input
+      <textarea
         type="text"
         placeholder={placeholder}
         value={value}
