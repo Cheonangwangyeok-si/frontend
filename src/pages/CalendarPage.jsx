@@ -9,6 +9,7 @@ import AngryImage from "../images/Angry.png";
 import SadImage from "../images/Sad.png";
 import SurprisedImage from "../images/Surprised.png";
 import BoringImage from "../images/Boring.png";
+import axios from 'axios';
 
 const CalendarPage = ({ currentDate, setEventBool, setCurrentDate, setClickDay, clickDay, eventBool }) => {
   const [dummy, setDummy] = useState([
@@ -43,6 +44,28 @@ const CalendarPage = ({ currentDate, setEventBool, setCurrentDate, setClickDay, 
       shortFeedback: "한 줄 감정 결과5",
     },
   ]);
+
+  // 한달치 일기 불러오기 
+  useEffect(() => {
+    const getDiaryDatas = async () => {
+      try {
+        const res = await axios.get('http://15.165.116.155:8080/api/v1/diary', {
+          params: {
+            year: currentDate.getFullYear(),
+            month: currentDate.getMonth() + 1
+          },
+          //{Authorization: `Bearer ${jwtToken}`}
+        });
+        console.log(res.data);
+        //{ headers: {Authorization: `Bearer ${window.localStorage.getItem('token')}` } 
+        //{headers: {'X-Requested-With': 'XMLHttpRequest'}} 
+        //setDummy(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    //getDiaryDatas()
+  }, []);
 
   const getYearMonthDay = useCallback((date) => {
     const year = date.getFullYear();
@@ -83,12 +106,12 @@ const CalendarPage = ({ currentDate, setEventBool, setCurrentDate, setClickDay, 
           <div className="dayDiaryInfo-container">
             <DiaryInfo
               id={id}
-              diaryData={dummy} // 일기 삭제할 때
+              diaryData={dummy}
               setDummy={setDummy}
               setClickDay={setClickDay}
               dayDiaryInfo={checkEvent(id)} // 하루 일기 정보
             />
-            <DayFeedback dayDiaryInfo={checkEvent(id)} Emotion={Emotion} />
+            <DayFeedback dayDiaryInfo={checkEvent(id)} />
           </div>
         ) : (
           <DiarySummaryList

@@ -1,22 +1,48 @@
 .day-feedback-container{
     box-sizing: border-box;
-    width: 600px;
+    max-width: 600px;
     background-color: #FFFFFF;
     border-radius: 32px;
     padding: 24px 32px;
+    height: 318px;
 
     .day-feedback-title{
         color: #2353B5;
+    }
+    .day-feedback-emotionbox{
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        margin: 20px 0px;
+        
+        .day-feedback-emotion{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 22px;
+
+            img{
+                width: 48px;
+                margin-bottom: 8px;
+            }
+            p {
+                font-size: 14px;
+            }
+            
+        }
+        hr{
+            margin: 10px auto;
+            opacity: 0.4;
+        }
     }
 
     .day-feedback-detailed_emotion{
         color: #818181;
         font-size: 14px;
         line-height: 25px;
-        height: 200px;
         overflow-y: scroll;
+        height: 110px;
         
-
         &::-webkit-scrollbar{
             display: none;
         }

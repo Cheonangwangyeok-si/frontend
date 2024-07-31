@@ -32,6 +32,13 @@ function DiarySummaryList({ diaryData, setDummy, currentDate, setCurrentDate, se
     );
     setDummy(nextDummy);
     setClickDay(false)
+
+    // try {
+    //     const res = await axios.delete(`http://15.165.116.155:8080/api/v1/diary/date/${id}`);
+    //     console.log(res.data);
+    // } catch (err) {
+    //     console.log(err);
+    // }
   }
 
   return (

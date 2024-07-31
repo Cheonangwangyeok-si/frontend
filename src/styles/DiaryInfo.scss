@@ -1,15 +1,19 @@
 .dayDiaryInfo-container{
     margin: 26px 0px 0px 16px;
+    width: 100%;
 
     .dayDiary-container{
         position: relative;
         box-sizing: border-box;
         max-width: 600px;
+        min-width: 380px;
         height: 458px;
         background-color: #E3EEFC;
         border-radius: 32px 80px 32px 32px;
         padding: 32px;
         margin-bottom: 16px;
+        display: flex;
+        flex-direction:column ;
 
         .dayDiary-date{
             font-size: 18px;
@@ -42,21 +46,18 @@
         }
 
         .dayDiary-delete{
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            margin: 32px;
             font-size: 16px;
             color: #A8A8A8;
             border:none;
             cursor: pointer;
             background-color: #E3EEFC;
+            margin-left: auto;
+            width: 45px;
         }
 
         .dayDiary-img{
             position: absolute;
-            width: 80px;
-            height: 80px;
+            width: 14%;
             right: 0;
             top: 0;
             padding: 32px;

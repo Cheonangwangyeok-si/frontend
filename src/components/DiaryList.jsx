@@ -7,6 +7,7 @@ import AngryImage from "../images/Angry.png";
 import SadImage from "../images/Sad.png";
 import SurprisedImage from "../images/Surprised.png";
 import BoringImage from "../images/Boring.png";
+import axios from 'axios';
 
 const emotionTypes = {
     [HappyImage]: 'happy',
@@ -52,13 +53,22 @@ const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActive
         setActiveComponent("calendar");
     };
 
-    const onDelete = (id, e) => {
+    const onDelete = async (id, e) => {
         e.stopPropagation();
+
         const nextDummy = diaryData.filter(
             item => item.dateAt !== id
         );
+
         setDummy(nextDummy);
         setCheckDiarys(prev => prev.filter((checkDate) => checkDate !== id))
+
+        // try {
+        //     const res = await axios.delete(`http://15.165.116.155:8080/api/v1/diary/date/${id}`);
+        //     console.log(res.data);
+        // } catch (err) {
+        //     console.log(err);
+        // }
     }
 
     const onDeleteCheck = () => {

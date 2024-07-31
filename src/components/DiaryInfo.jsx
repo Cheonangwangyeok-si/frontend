@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../styles/DiaryInfo.scss';
+import axios from 'axios';
 
 const DiaryInfo = ({ id, dayDiaryInfo, setDummy, diaryData, setClickDay }) => {
 
@@ -9,7 +10,26 @@ const DiaryInfo = ({ id, dayDiaryInfo, setDummy, diaryData, setClickDay }) => {
         );
         setDummy(nextDummy);
         setClickDay(false);
+
+        // try {
+        //     const res = await axios.delete(`http://15.165.116.155:8080/api/v1/diary/date/${id}`);
+        //     console.log(res.data);
+        // } catch (err) {
+        //     console.log(err);
+        // }
     }
+
+    useEffect(() => {
+        const getDiaryInfo = async () => {
+            try {
+                const res = axios.get(`http://15.165.116.155:8080/api/v1/diary/date/${id}`);
+                console.log(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        //getDiaryInfo();
+    }, []);
 
     return (
         <div className='dayDiary-container'>

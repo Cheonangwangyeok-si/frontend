@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DiaryList from "../components/DiaryList";
 import HappyImage from "../images/Happy.png";
 import AngryImage from "../images/Angry.png";
 import SadImage from "../images/Sad.png";
 import SurprisedImage from "../images/Surprised.png";
 import BoringImage from "../images/Boring.png";
+import axios from "axios";
 const DiaryPage = ({ setActiveComponent, setClickDay, setCurrentDate }) => {
   const [dummy, setDummy] = useState([
     {
@@ -43,6 +44,21 @@ const DiaryPage = ({ setActiveComponent, setClickDay, setCurrentDate }) => {
       content: "일기 내용5",
     },
   ]);
+
+  // 작성한 모든 일기 불러오기
+  useEffect(() => {
+    const getAllDiaryDatas = async () => {
+      try {
+        const res = await axios.get('http://15.165.116.155:8080/api/v1/diary/all')
+        console.log(res.data);
+        //setDummy(res.data);
+      } catch (err) {
+        console.log(err);
+
+      }
+    }
+    //getAllDiaryDatas();
+  }, []);
 
   return (
     <div className="main-container">
