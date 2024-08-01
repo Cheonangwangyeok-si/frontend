@@ -7,11 +7,11 @@ import SurprisedImage from "../images/Surprised.png";
 import BoringImage from "../images/Boring.png";
 
 const emotionColors = {
-  [HappyImage]: "#FFE75C",
-  [AngryImage]: "#FF6262",
-  [SadImage]: "#3293D7",
-  [SurprisedImage]: "#FEBB00",
-  [BoringImage]: "#C6C6C6",
+  "HAPPINESS": "#FFE75C",
+  "ANGER":"#FF6262",
+  "SADNESS": "#3293D7",
+  "SURPRISE": "#FEBB00",
+  "NEUTRAL":"#C6C6C6"
 };
 
 const Day = ({

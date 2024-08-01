@@ -58,7 +58,7 @@ const Calendar = ({ dummy, currentDate, setCurrentDate, getYearMonthDay, setClic
     const days = [...prevMonthDays, ...currentMonthDays, ...nextMonthDays];
 
     const findEvent = (date) => {
-        const event = dummy.find(event => event.dateAt === getYearMonthDay(date));
+        const event = dummy.find(event => event.diaryAt === getYearMonthDay(date));
         return event ? event : null;
     };
 

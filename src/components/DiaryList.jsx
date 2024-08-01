@@ -10,12 +10,13 @@ import BoringImage from "../images/Boring.png";
 import axios from 'axios';
 
 const emotionTypes = {
-    [HappyImage]: 'happy',
-    [AngryImage]: 'angry',
-    [SadImage]: 'sad',
-    [SurprisedImage]: 'surprised',
-    [BoringImage]: 'boring'
+    "HAPPINESS": HappyImage,
+    "ANGER": AngryImage,
+    "SADNESS": SadImage,
+    "SURPRISE": SurprisedImage,
+    "NEUTRAL": BoringImage
 };
+
 
 const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActiveComponent }) => {
     const [checkDiarys, setCheckDiarys] = useState([]);
@@ -37,9 +38,9 @@ const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActive
 
         filteredData.sort((a, b) => {
             if (sort === "Recent") {
-                return new Date(b.dateAt) - new Date(a.dateAt);
+                return new Date(b.diaryAt) - new Date(a.diaryAt);
             } else {
-                return new Date(a.dateAt) - new Date(b.dateAt);
+                return new Date(a.diaryAt) - new Date(b.diaryAt);
             }
         });
 
@@ -57,14 +58,14 @@ const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActive
         e.stopPropagation();
 
         const nextDummy = diaryData.filter(
-            item => item.dateAt !== id
+            item => item.diaryId !== id
         );
 
         setDummy(nextDummy);
         setCheckDiarys(prev => prev.filter((checkDate) => checkDate !== id))
 
         // try {
-        //     const res = await axios.delete(`http://15.165.116.155:8080/api/v1/diary/date/${id}`);
+        //     const res = await axios.delete(`/api/v1/diary/date/${id}`);
         //     console.log(res.data);
         // } catch (err) {
         //     console.log(err);
@@ -73,7 +74,7 @@ const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActive
 
     const onDeleteCheck = () => {
         const nextDummy = diaryData.filter(
-            diary => !(checkDiarys.includes(diary.dateAt))
+            diary => !(checkDiarys.includes(diary.diaryAt))
         );
         setDummy(nextDummy);
         setCheckDiarys([]);
@@ -91,7 +92,7 @@ const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActive
         if (e.target.checked) {
             const dateArr = [];
             filterDiaryData.forEach(diary =>
-                dateArr.push(diary.dateAt)
+                dateArr.push(diary.diaryAt)
             );
             setCheckDiarys(dateArr);
         } else {
@@ -130,19 +131,19 @@ const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActive
                     {filterDiaryData.map((diary) => (
                         <div className='diary-list'>
                             <input type="checkbox" className='checkbox'
-                                onChange={(e) => { onCheck(diary.dateAt, e) }}
-                                checked={checkDiarys.includes(diary.dateAt)}
+                                onChange={(e) => { onCheck(diary.diaryAt, e) }}
+                                checked={checkDiarys.includes(diary.diaryAt)}
                             />
-                            <div className='diary-box' onClick={() => { handleClick(diary.dateAt) }}>
+                            <div className='diary-box' onClick={() => { handleClick(diary.diaryAt) }}>
                                 <div className='diary-ec'>
                                     <img className='diary-emotion' src={diary.emotionType} />
                                     <div className='diary-contentbox'>
                                         <h3>{diary.title}</h3>
                                         <p className='diary-content'>{diary.content}</p>
-                                        <p className='diary-date-short'>{diary.dateAt.replace(/-/g, '.')} <b>·</b> {diary.shortFeedback}</p>
+                                        <p className='diary-date-short'>{diary.diaryAt.replace(/-/g, '.')} <b>·</b> {diary.shortFeedback}</p>
                                     </div>
                                 </div>
-                                <img className='diary-trash' src={Trash} onClick={(e) => { onDelete(diary.dateAt, e) }} />
+                                <img className='diary-trash' src={Trash} onClick={(e) => { onDelete(diary.diaryId, e) }} />
                             </div>
                         </div>
                     ))}

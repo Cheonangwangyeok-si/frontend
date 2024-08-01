@@ -6,23 +6,7 @@ import SadImage from "../images/Sad.png";
 import SurprisedImage from "../images/Surprised.png";
 import BoringImage from "../images/Boring.png";
 
-const DayFeedback = ({ dayDiaryInfo }) => {
-    const [dummyData, setDummyData] = useState(
-        {
-            diary_id: '1',
-            title: "일기 제목1",
-            content: "일기 내용1",
-            dateAt: "2024-07-31",
-            emotionType: SurprisedImage,
-            happiness: 10,
-            sadness: 10,
-            anger: 10,
-            surprise: 60,
-            neutral: 10,
-            detailed_emotion: "자센한 감정 분석 결과1",
-            shortFeedback: "한 줄 감정 결과1",
-        }
-    );
+const DayFeedback = ({ DiaryInfo }) => {
 
     return (
         <div className="day-feedback-container">
@@ -31,34 +15,34 @@ const DayFeedback = ({ dayDiaryInfo }) => {
                 <div className='day-feedback-emotion'>
                     <img src={HappyImage} alt="happiness" />
                     <p className='day-feedback-emotion-name'>행복</p>
-                    <b>{dummyData.happiness}%</b>
+                    <b>{DiaryInfo.HAPPINESS}%</b>
                 </div>
                 <hr />
                 <div className='day-feedback-emotion'>
                     <img src={AngryImage} alt="anger" />
                     <p>분노</p>
-                    <b>{dummyData.anger}%</b>
+                    <b>{DiaryInfo.ANGER}%</b>
                 </div>
                 <hr />
                 <div className='day-feedback-emotion'>
                     <img src={SadImage} alt="sadness" />
                     <p>슬픔</p>
-                    <b>{dummyData.sadness}%</b>
+                    <b>{DiaryInfo.SADNESS}%</b>
                 </div>
                 <hr />
                 <div className='day-feedback-emotion'>
                     <img src={SurprisedImage} alt="surprise" />
                     <p>놀람</p>
-                    <b>{dummyData.surprise}%</b>
+                    <b>{DiaryInfo.SURPRISE}%</b>
                 </div>
                 <hr />
                 <div className='day-feedback-emotion'>
                     <img src={BoringImage} alt="neutral" />
                     <p>중립</p>
-                    <b>{dummyData.neutral}%</b>
+                    <b>{DiaryInfo.NEUTRAL}%</b>
                 </div>
             </div>
-            <p className='day-feedback-detailed_emotion'>{dummyData?.detailed_emotion}</p>
+            <p className='day-feedback-detailed_emotion'>{DiaryInfo?.detailedFeedback}</p>
         </div >
     );
 };

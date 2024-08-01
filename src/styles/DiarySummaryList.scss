@@ -4,7 +4,7 @@
     position: relative;
     top: -17px;
     width: 100%;
-    max-width: 600px;
+    min-width: 380px;
     margin-left: 16px;
 
     .sort-select{
@@ -42,6 +42,8 @@
         border-radius: 32px 32px 80px 32px;
         padding: 28px 0px 31px 32px;
         margin-bottom: 16px;
+        max-width: 600px;
+
 
         .diary-summary-test{
             width: 80%;

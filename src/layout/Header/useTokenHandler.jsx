@@ -6,7 +6,7 @@ const useTokenHandler = () => {
   const config = {
     headers: {
       Authorization: `${localStorage.getItem("accessToken")}`,
-    },
+    }
   };
 
   const config2 = {

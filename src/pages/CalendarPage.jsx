@@ -1,8 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import Calendar from "../components/Calendar";
 import DiaryInfo from "../components/DiaryInfo";
-import Emotion from "../components/Emotion";
-import DayFeedback from "../components/DayFeedback";
 import DiarySummaryList from "../components/DiarySummaryList";
 import HappyImage from "../images/Happy.png";
 import AngryImage from "../images/Angry.png";
@@ -10,61 +8,67 @@ import SadImage from "../images/Sad.png";
 import SurprisedImage from "../images/Surprised.png";
 import BoringImage from "../images/Boring.png";
 import axios from 'axios';
+import useTokenHandler from "../layout/Header/useTokenHandler";
+import API from "../BaseUrl";
 
 const CalendarPage = ({ currentDate, setEventBool, setCurrentDate, setClickDay, clickDay, eventBool }) => {
+  const { checkToken } = useTokenHandler();
+
   const [dummy, setDummy] = useState([
-    {
-      dateAt: "2024-06-01",
-      title: "여름의 한가운데에서 느낀 슬픔",
-      emotionType: HappyImage,
-      shortFeedback: "한 줄 감정 결과1",
-    },
-    {
-      dateAt: "2024-06-16",
-      title: "여름의 한가운데에서 느낀 분노",
-      emotionType: HappyImage,
-      shortFeedback: "한 줄 감정 결과2",
-    },
-    {
-      dateAt: "2024-07-17",
-      title: "여름의 한가운데에서 느낀 절망",
-      emotionType: HappyImage,
-      shortFeedback: "한 줄 감정 결과3",
-    },
-    {
-      dateAt: "2024-07-20",
-      title: "여름의 한가운데에서 느낀 절망",
-      emotionType: SurprisedImage,
-      shortFeedback: "한 줄 감정 결과4",
-    },
-    {
-      dateAt: "2024-07-27",
-      title: "여름의 한가운데에서 느낀 절망",
-      emotionType: BoringImage,
-      shortFeedback: "한 줄 감정 결과5",
-    },
+    // {
+    //   dateAt: "2024-06-01",
+    //   title: "여름의 한가운데에서 느낀 슬픔",
+    //   emotionType: HappyImage,
+    //   shortFeedback: "한 줄 감정 결과1",
+    // },
+    // {
+    //   dateAt: "2024-06-16",
+    //   title: "여름의 한가운데에서 느낀 분노",
+    //   emotionType: HappyImage,
+    //   shortFeedback: "한 줄 감정 결과2",
+    // },
+    // {
+    //   dateAt: "2024-07-17",
+    //   title: "여름의 한가운데에서 느낀 절망",
+    //   emotionType: HappyImage,
+    //   shortFeedback: "한 줄 감정 결과3",
+    // },
+    // {
+    //   dateAt: "2024-07-20",
+    //   title: "여름의 한가운데에서 느낀 절망",
+    //   emotionType: SurprisedImage,
+    //   shortFeedback: "한 줄 감정 결과4",
+    // },
+    // {
+    //   dateAt: "2024-07-27",
+    //   title: "여름의 한가운데에서 느낀 절망",
+    //   emotionType: BoringImage,
+    //   shortFeedback: "한 줄 감정 결과5",
+    // },
   ]);
 
   // 한달치 일기 불러오기 
   useEffect(() => {
     const getDiaryDatas = async () => {
       try {
-        const res = await axios.get('http://15.165.116.155:8080/api/v1/diary', {
-          params: {
-            year: currentDate.getFullYear(),
-            month: currentDate.getMonth() + 1
-          },
-          //{Authorization: `Bearer ${jwtToken}`}
-        });
+        checkToken();
+        const res = await axios.get(`/api/v1/diary/month`, 
+            { params: {
+                year: currentDate.getFullYear(),
+                month: currentDate.getMonth() + 1
+              },
+              headers: {
+                Authorization: `${localStorage.getItem("accessToken")}`,
+              },
+            }
+        );
+        setDummy(res.data);
         console.log(res.data);
-        //{ headers: {Authorization: `Bearer ${window.localStorage.getItem('token')}` } 
-        //{headers: {'X-Requested-With': 'XMLHttpRequest'}} 
-        //setDummy(res.data);
       } catch (err) {
         console.log(err);
       }
     }
-    //getDiaryDatas()
+    getDiaryDatas()
   }, []);
 
   const getYearMonthDay = useCallback((date) => {
@@ -78,11 +82,11 @@ const CalendarPage = ({ currentDate, setEventBool, setCurrentDate, setClickDay, 
 
   const checkEvent = useCallback(
     (id) => {
-      return dummy.find((item) => item.dateAt === id);
+      return dummy.find((item) => item.diaryAt === id)?.diaryId;
     },
     [dummy]
   );
-
+  
   useEffect(() => {
     const event = checkEvent(id);
     setEventBool(event);
@@ -109,9 +113,8 @@ const CalendarPage = ({ currentDate, setEventBool, setCurrentDate, setClickDay, 
               diaryData={dummy}
               setDummy={setDummy}
               setClickDay={setClickDay}
-              dayDiaryInfo={checkEvent(id)} // 하루 일기 정보
+              diaryId={checkEvent(id)} 
             />
-            <DayFeedback dayDiaryInfo={checkEvent(id)} />
           </div>
         ) : (
           <DiarySummaryList
