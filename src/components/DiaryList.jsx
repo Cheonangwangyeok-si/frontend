@@ -34,7 +34,7 @@ const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActive
 
         if (filterEmotion !== "default") {
             filteredData = filteredData.filter(diary =>
-                emotionTypes[diary.emotionType] === filterEmotion
+                diary.emotionType === filterEmotion
             );
         }
 
@@ -58,42 +58,60 @@ const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActive
 
     const onDelete = async (id, e, date) => {
         e.stopPropagation();
-
+        
         const nextDummy = diaryData.filter(
-            item => item.diaryId !== date
+            item => item.diaryAt !== date
         );
-
-        setDummy(nextDummy);
-        setCheckDiarys(prev => prev.filter((checkDate) => checkDate !== date))
-
+        
         try {
             checkToken();
-            const res = await axios.delete(`/api/v1/diary`,{
-                params: {
-                    diary_id: id
-                  },
+            const res = await axios.delete(`/api/v1/diary/${id}`,{
                 headers: {
                     Authorization: `${localStorage.getItem("accessToken")}`,
-              },});
-            console.log(res.data);
-        } catch (err) {
-            console.log(err);
+                },});
+                console.log(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        setDummy(nextDummy);
+        setCheckDiarys(prev => prev.filter((checkDate) => checkDate !== date))
         }
-    }
 
-    const onDeleteCheck = () => {
-        const nextDummy = diaryData.filter(
+
+        const onDeleteCheck =  async() => {
+            const deleteDiaryRequests = checkDiarys.map(date => {
+                const diary = diaryData.find(diary => diary.diaryAt === date);
+                return diary ? {diaryId : diary.diaryId} : null;
+            });
+            if (deleteDiaryRequests.length === 0) return;
+            console.log(deleteDiaryRequests)
+            
+            try {
+                checkToken();
+                const res = await axios.post(`/api/v1/diary/deleteSelectedDiarys`,
+                    deleteDiaryRequests, {
+                    headers: {
+                        Authorization: `${localStorage.getItem("accessToken")}`,
+                        "Content-Type":'application/json'
+                    }
+                });
+                    console.log(res.data);
+                } catch (err) {
+                    console.log(err);
+                }
+            const nextDummy = diaryData.filter(
             diary => !(checkDiarys.includes(diary.diaryAt))
         );
+        
         setDummy(nextDummy);
         setCheckDiarys([]);
     }
 
-    const onCheck = (id, e) => {
+    const onCheck = (date, e) => {
         if (e.target.checked) {
-            setCheckDiarys(prev => [...prev, id])
+            setCheckDiarys(prev => [...prev, date])
         } else {
-            setCheckDiarys(prev => prev.filter((element) => element !== id))
+            setCheckDiarys(prev => prev.filter((element) => element !== date))
         }
     }
 
@@ -115,11 +133,11 @@ const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActive
                 <input type="text" placeholder='검색' value={search} onChange={(e) => { setSearch(e.target.value) }} />
                 <select id="sortEmotion" className='sort-select' value={filterEmotion} onChange={(e) => { setFilterEmotion(e.target.value) }}>
                     <option value="default">감정</option>
-                    <option value="happy">행복</option>
-                    <option value="angry">분노</option>
-                    <option value="sad">슬픔</option>
-                    <option value="surprised">놀람</option>
-                    <option value="boring">중립</option>
+                    <option value="HAPPINESS">행복</option>
+                    <option value="ANGER">분노</option>
+                    <option value="SADNESS">슬픔</option>
+                    <option value="SURPRISE">놀람</option>
+                    <option value="NEUTRAL">중립</option>
                 </select>
                 <select id="sortRecent" className='sort-select' value={sort} onChange={(e) => { setSort(e.target.value) }}>
                     <option value="Recent">최신순</option>
@@ -145,7 +163,7 @@ const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActive
                             />
                             <div className='diary-box' onClick={() => { handleClick(diary.diaryAt) }}>
                                 <div className='diary-ec'>
-                                    <img className='diary-emotion' src={diary.emotionType} />
+                                    <img className='diary-emotion' src={emotionTypes[diary.emotionType]} />
                                     <div className='diary-contentbox'>
                                         <h3>{diary.title}</h3>
                                         <p className='diary-content'>{diary.content}</p>

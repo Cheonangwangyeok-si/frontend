@@ -3,9 +3,22 @@ import '../styles/DiaryInfo.scss';
 import axios from 'axios';
 import DayFeedback from "../components/DayFeedback";
 import useTokenHandler from '../layout/Header/useTokenHandler';
+import HappyImage from "../images/Happy.png";
+import AngryImage from "../images/Angry.png";
+import SadImage from "../images/Sad.png";
+import SurprisedImage from "../images/Surprised.png";
+import BoringImage from "../images/Boring.png";
+
+const emotionTypes = {
+    "HAPPINESS": HappyImage,
+    "ANGER": AngryImage,
+    "SADNESS": SadImage,
+    "SURPRISE": SurprisedImage,
+    "NEUTRAL": BoringImage
+};
 
 const DiaryInfo = ({ id, diaryId, setDummy, diaryData, setClickDay }) => {
-  const { checkToken } = useTokenHandler();
+    const { checkToken } = useTokenHandler();
     const [diaryInfo, setDiaryInfo] = useState(
         // {
         //     diaryId: '1',
@@ -25,17 +38,14 @@ const DiaryInfo = ({ id, diaryId, setDummy, diaryData, setClickDay }) => {
     
     const onDelete = async () => {
         const nextDummy = diaryData.filter(
-            item => item.dateAt !== id
+            item => item.diaryAt !== id
         );
         setDummy(nextDummy);
         setClickDay(false);
 
         try {
             checkToken();
-            const res = await axios.delete(`/api/v1/diary`,{
-                params: {
-                    diary_id:diaryId
-                  },
+            const res = await axios.delete(`/api/v1/diary/${diaryId}`,{
                 headers: {
                     Authorization: `${localStorage.getItem("accessToken")}`,
               },});
@@ -44,28 +54,26 @@ const DiaryInfo = ({ id, diaryId, setDummy, diaryData, setClickDay }) => {
             console.log(err);
         }
     }
-
+    
     useEffect(() => {
         const getDiaryInfo = async () => {
             try {
                 checkToken();
-                const res = await axios.get(`/api/v1/diary`,
-                    { params: {
-                        diary_id: diaryId
-                      },
+                const res = await axios.get(`/api/v1/diary/${diaryId}`,
+                    { 
                       headers: {
                         Authorization: `${localStorage.getItem("accessToken")}`,
                       },
                     }
                 );
-                setDiaryInfo(res.data);
                 console.log(res.data);
+                setDiaryInfo(res.data);
             } catch (err) {
                 console.log(err);
             }
         };
         getDiaryInfo();
-    }, []);
+    }, [id]);
     
     return (
         <div>
@@ -74,10 +82,10 @@ const DiaryInfo = ({ id, diaryId, setDummy, diaryData, setClickDay }) => {
                 <div className='dayDiary-title'>{diaryInfo?.title}</div>
                 <div className='dayDiary-short_emotion'>{diaryInfo?.shortFeedback}</div>
                 <div className='dayDiary-content'>{diaryInfo?.content}</div>
-                <img className='dayDiary-img' src={diaryInfo?.emotionType} />
+                <img className='dayDiary-img' src={emotionTypes[diaryInfo?.emotionType]} />
                 <button className='dayDiary-delete' onClick={onDelete} >삭제</button>
             </div >
-            <DayFeedback DiaryInfo={DiaryInfo}/>
+            <DayFeedback Info={diaryInfo}/>
         </div>
     );
 };

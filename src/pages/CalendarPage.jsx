@@ -68,7 +68,7 @@ const CalendarPage = ({ currentDate, setEventBool, setCurrentDate, setClickDay, 
       }
     }
     getDiaryDatas()
-  }, []);
+  }, [currentDate]);
 
   const getYearMonthDay = useCallback((date) => {
     const year = date.getFullYear();

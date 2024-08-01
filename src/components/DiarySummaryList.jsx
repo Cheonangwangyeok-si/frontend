@@ -51,10 +51,7 @@ function DiarySummaryList({ diaryData, setDummy, currentDate, setCurrentDate, se
 
     try {
       checkToken();
-      const res = await axios.delete(`/api/v1/diary`,{
-          params: {
-              diary_id: id
-            },
+      const res = await axios.delete(`/api/v1/diary/${id}`,{
           headers: {
               Authorization: `${localStorage.getItem("accessToken")}`,
         },});
