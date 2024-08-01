@@ -5,6 +5,8 @@ import AngryImage from "../images/Angry.png";
 import SadImage from "../images/Sad.png";
 import SurprisedImage from "../images/Surprised.png";
 import BoringImage from "../images/Boring.png";
+import axios from "axios";
+import useTokenHandler from "../layout/Header/useTokenHandler";
 
 const emotionTypes = {
     "HAPPINESS": HappyImage,
@@ -15,6 +17,7 @@ const emotionTypes = {
 };
 
 function DiarySummaryList({ diaryData, setDummy, currentDate, setCurrentDate, setClickDay }) {
+  const { checkToken } = useTokenHandler();
   const [sort, setSort] = useState("Asc");
   const [filterDiaryData, setFilterDiaryData] = useState([]);
 
@@ -38,20 +41,27 @@ function DiarySummaryList({ diaryData, setDummy, currentDate, setCurrentDate, se
     setFilterDiaryData(filteredData);
   }, [sort, diaryData])
 
-  const onDelete = (id, e) => {
+  const onDelete = async (date, e,id) => {
     e.stopPropagation();
     const nextDummy = diaryData.filter(
-      item => item.diaryAt !== id
+      item => item.diaryAt !== date
     );
     setDummy(nextDummy);
     setClickDay(false)
 
-    // try {
-    //     const res = await axios.delete(`http://15.165.116.155:8080/api/v1/diary/date/${id}`);
-    //     console.log(res.data);
-    // } catch (err) {
-    //     console.log(err);
-    // }
+    try {
+      checkToken();
+      const res = await axios.delete(`/api/v1/diary`,{
+          params: {
+              diary_id: id
+            },
+          headers: {
+              Authorization: `${localStorage.getItem("accessToken")}`,
+        },});
+      console.log(res.data);
+  } catch (err) {
+      console.log(err);
+  }
   }
   
   return (
@@ -73,7 +83,7 @@ function DiarySummaryList({ diaryData, setDummy, currentDate, setCurrentDate, se
               </div>
               <div className="diary-summary-right">
                 <div className="diary-summary-delete"
-                  onClick={(e) => { onDelete(diary.diaryAt, e) }}>삭제</div>
+                  onClick={(e) => { onDelete(diary.diaryAt, e,diary.diaryId) }}>삭제</div>
                 <img src={emotionTypes[diary.emotionType]} />
               </div>
             </div>

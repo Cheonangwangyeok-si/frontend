@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
 import DiaryList from "../components/DiaryList";
-import HappyImage from "../images/Happy.png";
-import AngryImage from "../images/Angry.png";
-import SadImage from "../images/Sad.png";
-import SurprisedImage from "../images/Surprised.png";
-import BoringImage from "../images/Boring.png";
 import axios from "axios";
 import useTokenHandler from '../layout/Header/useTokenHandler';
 
@@ -60,7 +55,7 @@ const DiaryPage = ({ setActiveComponent, setClickDay, setCurrentDate }) => {
           },}
         );
         console.log(res.data);
-        // setDummy(res.data);
+        setDummy(res.data);
       } catch (err) {
         console.log(err);
       }

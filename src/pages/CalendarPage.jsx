@@ -9,7 +9,6 @@ import SurprisedImage from "../images/Surprised.png";
 import BoringImage from "../images/Boring.png";
 import axios from 'axios';
 import useTokenHandler from "../layout/Header/useTokenHandler";
-import API from "../BaseUrl";
 
 const CalendarPage = ({ currentDate, setEventBool, setCurrentDate, setClickDay, clickDay, eventBool }) => {
   const { checkToken } = useTokenHandler();

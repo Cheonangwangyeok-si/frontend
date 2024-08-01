@@ -22,7 +22,7 @@ const DiaryInfo = ({ id, diaryId, setDummy, diaryData, setClickDay }) => {
         //     shortFeedback: "한 줄 감정 결과1",
         // }
     );
-    console.log(id)
+    
     const onDelete = async () => {
         const nextDummy = diaryData.filter(
             item => item.dateAt !== id

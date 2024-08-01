@@ -8,6 +8,7 @@ import SadImage from "../images/Sad.png";
 import SurprisedImage from "../images/Surprised.png";
 import BoringImage from "../images/Boring.png";
 import axios from 'axios';
+import useTokenHandler from '../layout/Header/useTokenHandler';
 
 const emotionTypes = {
     "HAPPINESS": HappyImage,
@@ -19,6 +20,7 @@ const emotionTypes = {
 
 
 const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActiveComponent }) => {
+    const { checkToken } = useTokenHandler();
     const [checkDiarys, setCheckDiarys] = useState([]);
     const [search, setSearch] = useState('');
     const [filterDiaryData, setFilterDiaryData] = useState([]);
@@ -54,22 +56,29 @@ const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActive
         setActiveComponent("calendar");
     };
 
-    const onDelete = async (id, e) => {
+    const onDelete = async (id, e, date) => {
         e.stopPropagation();
 
         const nextDummy = diaryData.filter(
-            item => item.diaryId !== id
+            item => item.diaryId !== date
         );
 
         setDummy(nextDummy);
-        setCheckDiarys(prev => prev.filter((checkDate) => checkDate !== id))
+        setCheckDiarys(prev => prev.filter((checkDate) => checkDate !== date))
 
-        // try {
-        //     const res = await axios.delete(`/api/v1/diary/date/${id}`);
-        //     console.log(res.data);
-        // } catch (err) {
-        //     console.log(err);
-        // }
+        try {
+            checkToken();
+            const res = await axios.delete(`/api/v1/diary`,{
+                params: {
+                    diary_id: id
+                  },
+                headers: {
+                    Authorization: `${localStorage.getItem("accessToken")}`,
+              },});
+            console.log(res.data);
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     const onDeleteCheck = () => {
@@ -143,7 +152,7 @@ const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActive
                                         <p className='diary-date-short'>{diary.diaryAt.replace(/-/g, '.')} <b>·</b> {diary.shortFeedback}</p>
                                     </div>
                                 </div>
-                                <img className='diary-trash' src={Trash} onClick={(e) => { onDelete(diary.diaryId, e) }} />
+                                <img className='diary-trash' src={Trash} onClick={(e) => { onDelete(diary.diaryId, e, diary.diaryAt) }} />
                             </div>
                         </div>
                     ))}
