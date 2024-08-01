@@ -48,6 +48,6 @@ const useTokenHandler = () => {
     }
   };
 
-  return { handlelogin_tk2, checkToken };
+  return { handlelogin_tk2, checkToken, config };
 };
 export default useTokenHandler;

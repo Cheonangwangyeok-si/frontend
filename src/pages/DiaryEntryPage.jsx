@@ -13,9 +13,11 @@ import SelectSurprisedImage from "../images/Select_Surprised.png";
 import SelectBoringImage from "../images/Select_Boring.png";
 import InputForm from "../components/InputForm";
 import API from "../BaseUrl";
+import useTokenHandler from "../layout/Header/useTokenHandler";
 import "../styles/DiaryEntryPage.scss";
 
 const DiaryEntryPage = () => {
+  const { checkToken, config } = useTokenHandler();
   const [currentDate, setCurrentDate] = useState(new Date());
   // 감정 데이터
   const emotionImages = {
@@ -25,6 +27,8 @@ const DiaryEntryPage = () => {
     놀람: { normal: SurprisedImage, selected: SelectSurprisedImage },
     중립: { normal: BoringImage, selected: SelectBoringImage },
   };
+
+  const [missingDays, setMissingDays] = useState([]);
 
   const [emotionData, setEmotionData] = useState([
     {
@@ -90,13 +94,7 @@ const DiaryEntryPage = () => {
       return;
     }
     try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          "Content-Type": "application/json",
-        },
-      };
-
+      checkToken();
       const res = await API.post(
         `/api/v1/diary`,
         {
@@ -114,20 +112,16 @@ const DiaryEntryPage = () => {
     }
   };
 
-  const missingDays = async () => {
+  const findMissingDays = async () => {
     try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      };
       const res = await API.get(`/api/v1/diary/missing-days`, config);
       console.log(res);
+      
     } catch (err) {
       console.log(err);
     }
   };
-  
+
   return (
     <div className="main-container" style={{ width: "1063px" }}>
       <div className="title">
