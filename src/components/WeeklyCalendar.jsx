@@ -127,6 +127,7 @@ const WeeklyCalendar = ({
           <Day
             id={getYearMonthDay(day)}
             key={getYearMonthDay(day)}
+            type="weekly"
             day={day}
             event={findEvent(day)}
             setCurrentDate={setCurrentDate}

@@ -12,6 +12,7 @@ import SelectSadImage from "../images/Select_Sad.png";
 import SelectSurprisedImage from "../images/Select_Surprised.png";
 import SelectBoringImage from "../images/Select_Boring.png";
 import InputForm from "../components/InputForm";
+import API from "../BaseUrl";
 import "../styles/DiaryEntryPage.scss";
 
 const DiaryEntryPage = () => {
@@ -27,26 +28,31 @@ const DiaryEntryPage = () => {
 
   const [emotionData, setEmotionData] = useState([
     {
+      id: "HAPPINESS",
       emotion: "행복",
       percent: "47%",
       src: HappyImage,
     },
     {
+      id: "ANGER",
       emotion: "분노",
       percent: "3%",
       src: AngryImage,
     },
     {
+      id: "SADNESS",
       emotion: "슬픔",
       percent: "20%",
       src: SadImage,
     },
     {
+      id: "SURPRISE",
       emotion: "놀람",
       percent: "0%",
       src: SurprisedImage,
     },
     {
+      id: "NEUTRAL",
       emotion: "중립",
       percent: "30%",
       src: BoringImage,
@@ -61,9 +67,10 @@ const DiaryEntryPage = () => {
   };
 
   useEffect(() => {
+    console.log(selectEmotion);
     setEmotionData(
       emotionData.map((data) => {
-        if (data.emotion === selectEmotion) {
+        if (data.id === selectEmotion) {
           return {
             ...data,
             src: checkEmotion(data.emotion),
@@ -77,16 +84,55 @@ const DiaryEntryPage = () => {
     );
   }, [selectEmotion]);
 
+  const postDiary = async () => {
+    if (!title || !content || !selectEmotion) {
+      alert("모든 항목을 입력해주세요.");
+      return;
+    }
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          "Content-Type": "application/json",
+        },
+      };
+
+      const res = await API.post(
+        `/api/v1/diary`,
+        {
+          diaryAt: currentDate,
+          title: title,
+          content: content,
+          emotionType: selectEmotion,
+        },
+        config
+      );
+
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const missingDays = async () => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      };
+      const res = await API.get(`/api/v1/diary/missing-days`, config);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
   return (
     <div className="main-container" style={{ width: "1063px" }}>
       <div className="title">
         <h1>WRITE AN EMOTIONAL DIARY</h1>
-        <button
-          className="submit-button"
-          onClick={() =>
-            console.log({ currentDate, selectEmotion, title, content })
-          }
-        >
+        <button className="submit-button" onClick={() => postDiary()}>
           일기 작성 완료
         </button>
       </div>
