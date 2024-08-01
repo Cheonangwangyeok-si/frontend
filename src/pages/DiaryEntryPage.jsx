@@ -114,13 +114,24 @@ const DiaryEntryPage = () => {
 
   const findMissingDays = async () => {
     try {
-      const res = await API.get(`/api/v1/diary/missing-days`, config);
+      checkToken();
+      const res = await API.get(`/api/v1/diary/missing-days`,
+        {
+          params: {
+            year: currentDate.getFullYear(),
+            month: currentDate.getMonth() + 1,
+          },
+        },
+        config);
       console.log(res);
-      
     } catch (err) {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    findMissingDays();
+  }, []);
 
   return (
     <div className="main-container" style={{ width: "1063px" }}>
