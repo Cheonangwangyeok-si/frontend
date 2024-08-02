@@ -2,11 +2,6 @@ import React, { useState, useCallback, useEffect } from "react";
 import Calendar from "../components/Calendar";
 import DiaryInfo from "../components/DiaryInfo";
 import DiarySummaryList from "../components/DiarySummaryList";
-import HappyImage from "../images/Happy.png";
-import AngryImage from "../images/Angry.png";
-import SadImage from "../images/Sad.png";
-import SurprisedImage from "../images/Surprised.png";
-import BoringImage from "../images/Boring.png";
 import axios from 'axios';
 import useTokenHandler from "../layout/Header/useTokenHandler";
 
@@ -51,15 +46,16 @@ const CalendarPage = ({ currentDate, setEventBool, setCurrentDate, setClickDay, 
     const getDiaryDatas = async () => {
       try {
         checkToken();
-        const res = await axios.get(`/api/v1/diary/month`, 
-            { params: {
-                year: currentDate.getFullYear(),
-                month: currentDate.getMonth() + 1
-              },
-              headers: {
-                Authorization: `${localStorage.getItem("accessToken")}`,
-              },
-            }
+        const res = await axios.get(`/api/v1/diary/month`,
+          {
+            params: {
+              year: currentDate.getFullYear(),
+              month: currentDate.getMonth() + 1
+            },
+            headers: {
+              Authorization: `${localStorage.getItem("accessToken")}`,
+            },
+          }
         );
         setDummy(res.data);
         console.log(res.data);
@@ -68,7 +64,7 @@ const CalendarPage = ({ currentDate, setEventBool, setCurrentDate, setClickDay, 
       }
     }
     getDiaryDatas()
-  }, [currentDate]);
+  }, [currentDate.getMonth()]);
 
   const getYearMonthDay = useCallback((date) => {
     const year = date.getFullYear();
@@ -85,7 +81,7 @@ const CalendarPage = ({ currentDate, setEventBool, setCurrentDate, setClickDay, 
     },
     [dummy]
   );
-  
+
   useEffect(() => {
     const event = checkEvent(id);
     setEventBool(event);
@@ -112,7 +108,7 @@ const CalendarPage = ({ currentDate, setEventBool, setCurrentDate, setClickDay, 
               diaryData={dummy}
               setDummy={setDummy}
               setClickDay={setClickDay}
-              diaryId={checkEvent(id)} 
+              diaryId={checkEvent(id)}
             />
           </div>
         ) : (

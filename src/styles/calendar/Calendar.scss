@@ -7,9 +7,10 @@
     border-radius: 32px;
     margin-top: 26px;
     height: 100%;
-    width: 100%;
+    width: 50%;
     max-width: 828px;
     max-height: 784px;
+    min-width: 415px;
     aspect-ratio: 1;
 
     .calendar-header{

@@ -1,12 +1,12 @@
 .dayDiaryInfo-container{
-    margin: 26px 0px 0px 16px;
+    margin: 26px 20px 0px 16px;
     width: 100%;
+    min-width: 415px;
+    max-width: 600px;
 
     .dayDiary-container{
         position: relative;
         box-sizing: border-box;
-        max-width: 600px;
-        min-width: 380px;
         height: 458px;
         background-color: #E3EEFC;
         border-radius: 32px 80px 32px 32px;
@@ -27,6 +27,12 @@
             line-height: 34px;
             margin-top: 24px;
             width: 80%;
+            height:67px;
+            overflow: scroll;
+
+            &::-webkit-scrollbar{
+                display: none;
+            }
         }
         
         .dayDiary-short_emotion{

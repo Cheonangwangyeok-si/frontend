@@ -4,18 +4,27 @@
         display: flex;
         align-items: center;
         
-        p{
-            font-size: 14px;
-            color: #2343B5;
-        }
-
-        img {
-            width: 24px;
-            height: 24px;
-            cursor: pointer;
+        .diary-check1 {
+            display: flex;
+            align-items: center;
+            width: 80%;
+            justify-content: space-between;
+            max-width: 1000px;
             
-            &:hover{
-                content: url('../images/DiaryViewImage/Trash.png');
+            p{
+                font-size: 14px;
+                color: #2343B5;
+            }
+    
+            img {
+                width: 24px;
+                height: 24px;
+                cursor: pointer;
+                margin-right: 28px;
+                
+                &:hover{
+                    content: url('../images/DiaryViewImage/Trash.png');
+                }
             }
         }
     }
@@ -71,7 +80,7 @@
             display: flex;
             align-items: center;
             height: 120px;
-            width: 87%;
+            width: 80%;
             max-width: 1000px;
             padding: 21px 28px;
             background-color: #E3EEFC;

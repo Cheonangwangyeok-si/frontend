@@ -50,9 +50,11 @@ const DiaryPage = ({ setActiveComponent, setClickDay, setCurrentDate }) => {
       try {
         checkToken();
         const res = await axios.get('/api/v1/diary/all',
-          {headers: {
-            Authorization: `${localStorage.getItem("accessToken")}`,
-          },}
+          {
+            headers: {
+              Authorization: `${localStorage.getItem("accessToken")}`,
+            },
+          }
         );
         console.log(res.data);
         setDummy(res.data);

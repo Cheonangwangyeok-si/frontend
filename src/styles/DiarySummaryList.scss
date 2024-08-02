@@ -4,9 +4,11 @@
     position: relative;
     top: -17px;
     width: 100%;
-    min-width: 380px;
+    min-width: 415px;
+    max-width: 600px;
     margin-left: 16px;
-
+    margin-right: 20px;
+    
     .sort-select{
         color: #2343B5;
         display: flex;
@@ -40,13 +42,12 @@
         display: flex;
         justify-content: space-between;
         border-radius: 32px 32px 80px 32px;
-        padding: 28px 0px 31px 32px;
+        padding: 28px 30px 31px 32px;
         margin-bottom: 16px;
-        max-width: 600px;
-
 
         .diary-summary-test{
             width: 80%;
+            flex:0.8;
 
             .diary-summary-date{
                 font-size: 18px;
@@ -71,10 +72,10 @@
     
         }
         .diary-summary-right{
+            flex:0.2;
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            margin-right: 30px;
 
             .diary-summary-delete{
                 font-size: 14px;
@@ -87,8 +88,8 @@
                 }
             }
             img{
-                width: 72px;
-                height: 72px;
+                width: 67%;
+                
                 margin-top: 5px;
             }
         }

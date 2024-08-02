@@ -35,35 +35,37 @@ const DiaryInfo = ({ id, diaryId, setDummy, diaryData, setClickDay }) => {
         //     shortFeedback: "한 줄 감정 결과1",
         // }
     );
-    
+
     const onDelete = async () => {
         const nextDummy = diaryData.filter(
             item => item.diaryAt !== id
         );
-        setDummy(nextDummy);
-        setClickDay(false);
 
         try {
             checkToken();
-            const res = await axios.delete(`/api/v1/diary/${diaryId}`,{
+            const res = await axios.delete(`/api/v1/diary/${diaryId}`, {
                 headers: {
                     Authorization: `${localStorage.getItem("accessToken")}`,
-              },});
+                },
+            });
+            alert("일기가 삭제되었습니다.");
             console.log(res.data);
         } catch (err) {
             console.log(err);
         }
+        setDummy(nextDummy);
+        setClickDay(false);
     }
-    
+
     useEffect(() => {
         const getDiaryInfo = async () => {
             try {
                 checkToken();
                 const res = await axios.get(`/api/v1/diary/${diaryId}`,
-                    { 
-                      headers: {
-                        Authorization: `${localStorage.getItem("accessToken")}`,
-                      },
+                    {
+                        headers: {
+                            Authorization: `${localStorage.getItem("accessToken")}`,
+                        },
                     }
                 );
                 console.log(res.data);
@@ -74,7 +76,7 @@ const DiaryInfo = ({ id, diaryId, setDummy, diaryData, setClickDay }) => {
         };
         getDiaryInfo();
     }, [id]);
-    
+
     return (
         <div>
             <div className='dayDiary-container'>
@@ -85,7 +87,7 @@ const DiaryInfo = ({ id, diaryId, setDummy, diaryData, setClickDay }) => {
                 <img className='dayDiary-img' src={emotionTypes[diaryInfo?.emotionType]} />
                 <button className='dayDiary-delete' onClick={onDelete} >삭제</button>
             </div >
-            <DayFeedback Info={diaryInfo}/>
+            <DayFeedback Info={diaryInfo} />
         </div>
     );
 };

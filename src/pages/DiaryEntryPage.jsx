@@ -113,7 +113,7 @@ const DiaryEntryPage = () => {
         },
         config
       );
-      if(res.status === 201) {
+      if (res.status === 201) {
         alert("일기 작성이 완료되었습니다.");
         window.location.reload();
       }

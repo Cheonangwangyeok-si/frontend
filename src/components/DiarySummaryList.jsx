@@ -9,11 +9,11 @@ import axios from "axios";
 import useTokenHandler from "../layout/Header/useTokenHandler";
 
 const emotionTypes = {
-    "HAPPINESS": HappyImage,
-    "ANGER": AngryImage,
-    "SADNESS": SadImage,
-    "SURPRISE": SurprisedImage,
-    "NEUTRAL": BoringImage
+  "HAPPINESS": HappyImage,
+  "ANGER": AngryImage,
+  "SADNESS": SadImage,
+  "SURPRISE": SurprisedImage,
+  "NEUTRAL": BoringImage
 };
 
 function DiarySummaryList({ diaryData, setDummy, currentDate, setCurrentDate, setClickDay }) {
@@ -41,53 +41,68 @@ function DiarySummaryList({ diaryData, setDummy, currentDate, setCurrentDate, se
     setFilterDiaryData(filteredData);
   }, [sort, diaryData])
 
-  const onDelete = async (date, e,id) => {
+  const onDelete = async (date, e, id) => {
     e.stopPropagation();
+
     const nextDummy = diaryData.filter(
       item => item.diaryAt !== date
     );
-    setDummy(nextDummy);
-    setClickDay(false)
-
     try {
       checkToken();
-      const res = await axios.delete(`/api/v1/diary/${id}`,{
-          headers: {
-              Authorization: `${localStorage.getItem("accessToken")}`,
-        },});
+      const res = await axios.delete(`/api/v1/diary/${id}`, {
+        headers: {
+          Authorization: `${localStorage.getItem("accessToken")}`,
+        },
+      });
       console.log(res.data);
-  } catch (err) {
+      alert("일기가 삭제되었습니다.");
+    } catch (err) {
       console.log(err);
+    }
+    setDummy(nextDummy);
+    setClickDay(false)
   }
-  }
-  
+
   return (
-    <div className="diary-summary-container">
-      <label name="listSort" className="sort-select">날짜
-        <select id="listSort" value={sort} onChange={onChange}>
-          <option value="Asc">오름차순</option>
-          <option value="Desc">내림차순</option>
-        </select>
-      </label>
-      <div className="diary-summary-list">
-        {filterDiaryData.map((diary) => {
-          return parseInt(diary.diaryAt.split('-')[1], 10) === currentDate.getMonth() + 1 ? (
-            <div key={diary.diaryAt} className="diary-summary-content" onClick={() => handleClick(diary.diaryAt)}>
-              <div className="diary-summary-test">
-                <p className="diary-summary-date">{diary.diaryAt.replace(/-/g, '.')}</p>
-                <p className="diary-summary-title">{diary.title}</p>
-                <p className="diary-summary-sumContent">{diary.shortFeedback}</p>
-              </div>
-              <div className="diary-summary-right">
-                <div className="diary-summary-delete"
-                  onClick={(e) => { onDelete(diary.diaryAt, e,diary.diaryId) }}>삭제</div>
-                <img src={emotionTypes[diary.emotionType]} />
-              </div>
-            </div>
-          ) : null
-        })}
-      </div>
-    </div>
+    <>
+      {!filterDiaryData.length ? (
+        null
+      ) : (
+        <div className="diary-summary-container">
+          <label htmlFor="listSort" className="sort-select">
+            날짜
+            <select id="listSort" value={sort} onChange={onChange}>
+              <option value="Asc">오름차순</option>
+              <option value="Desc">내림차순</option>
+            </select>
+          </label>
+          <div className="diary-summary-list">
+            {filterDiaryData.map((diary) =>
+              parseInt(diary.diaryAt.split('-')[1], 10) === currentDate.getMonth() + 1 ? (
+                <div key={diary.diaryId} className="diary-summary-content" onClick={() => handleClick(diary.diaryAt)}>
+                  <div className="diary-summary-test">
+                    <p className="diary-summary-date">{diary.diaryAt.replace(/-/g, '.')}</p>
+                    <p className="diary-summary-title">{diary.title}</p>
+                    <p className="diary-summary-sumContent">{diary.shortFeedback}</p>
+                  </div>
+                  <div className="diary-summary-right">
+                    <div
+                      className="diary-summary-delete"
+                      onClick={(e) => {
+                        onDelete(diary.diaryAt, e, diary.diaryId);
+                      }}
+                    >
+                      삭제
+                    </div>
+                    <img src={emotionTypes[diary.emotionType]} alt="emotion" />
+                  </div>
+                </div>
+              ) : null
+            )}
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 

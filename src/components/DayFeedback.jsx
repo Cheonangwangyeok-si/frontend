@@ -6,7 +6,6 @@ import SurprisedImage from "../images/Surprised.png";
 import BoringImage from "../images/Boring.png";
 
 const DayFeedback = ({ Info }) => {
-    console.log(Info)
     return (
         <div className="day-feedback-container">
             <p className='day-feedback-title'> AI 감정 피드백</p >

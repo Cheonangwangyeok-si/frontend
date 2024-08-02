@@ -58,51 +58,54 @@ const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActive
 
     const onDelete = async (id, e, date) => {
         e.stopPropagation();
-        
+
         const nextDummy = diaryData.filter(
             item => item.diaryAt !== date
         );
-        
+
         try {
             checkToken();
-            const res = await axios.delete(`/api/v1/diary/${id}`,{
+            const res = await axios.delete(`/api/v1/diary/${id}`, {
                 headers: {
                     Authorization: `${localStorage.getItem("accessToken")}`,
-                },});
-                console.log(res.data);
-            } catch (err) {
-                console.log(err);
-            }
+                },
+            });
+            console.log(res.data);
+            alert("일기가 삭제되었습니다.");
+        } catch (err) {
+            console.log(err);
+        }
         setDummy(nextDummy);
         setCheckDiarys(prev => prev.filter((checkDate) => checkDate !== date))
-        }
+    }
 
 
-        const onDeleteCheck =  async() => {
-            const deleteDiaryRequests = checkDiarys.map(date => {
-                const diary = diaryData.find(diary => diary.diaryAt === date);
-                return diary ? {diaryId : diary.diaryId} : null;
-            });
-            if (deleteDiaryRequests.length === 0) return;
-            console.log(deleteDiaryRequests)
-            
-            try {
-                checkToken();
-                const res = await axios.post(`/api/v1/diary/deleteSelectedDiarys`,
-                    deleteDiaryRequests, {
-                    headers: {
-                        Authorization: `${localStorage.getItem("accessToken")}`,
-                        "Content-Type":'application/json'
-                    }
-                });
-                    console.log(res.data);
-                } catch (err) {
-                    console.log(err);
+    const onDeleteCheck = async () => {
+        const deleteDiaryRequests = checkDiarys.map(date => {
+            const diary = diaryData.find(diary => diary.diaryAt === date);
+            return diary ? { diaryId: diary.diaryId } : null;
+        });
+        if (deleteDiaryRequests.length === 0) return;
+        console.log(deleteDiaryRequests)
+
+        try {
+            checkToken();
+            const res = await axios.post(`/api/v1/diary/deleteSelectedDiarys`,
+                deleteDiaryRequests, {
+                headers: {
+                    Authorization: `${localStorage.getItem("accessToken")}`,
+                    "Content-Type": 'application/json'
                 }
-            const nextDummy = diaryData.filter(
+            });
+            console.log(res.data);
+            alert("일기가 삭제되었습니다.");
+        } catch (err) {
+            console.log(err);
+        }
+        const nextDummy = diaryData.filter(
             diary => !(checkDiarys.includes(diary.diaryAt))
         );
-        
+
         setDummy(nextDummy);
         setCheckDiarys([]);
     }
@@ -150,8 +153,10 @@ const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActive
                         onChange={onAllCheck}
                         checked={(checkDiarys.length === filterDiaryData.length) && filterDiaryData.length}
                     />
-                    <p>{filterDiaryData.length}개의 감정 일기</p>
-                    <img src={Trash1} onClick={onDeleteCheck} />
+                    <div className='diary-check1'>
+                        <p>{filterDiaryData.length}개의 감정 일기</p>
+                        <img src={Trash1} onClick={onDeleteCheck} />
+                    </div>
                 </div>
                 <hr />
                 <div className='diary-lists'>
@@ -174,6 +179,7 @@ const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActive
                             </div>
                         </div>
                     ))}
+                    {!filterDiaryData.length && <p>작성된 일기가 없습니다. 일기를 작성해주세요!</p>}
                 </div>
             </div>
         </div>
