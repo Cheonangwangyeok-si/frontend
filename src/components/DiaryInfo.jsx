@@ -82,7 +82,7 @@ const DiaryInfo = ({ id, diaryId, setDummy, diaryData, setClickDay }) => {
             <div className='dayDiary-container'>
                 <div className='dayDiary-date'>{diaryInfo?.diaryAt.replace(/-/g, '.')}</div>
                 <div className='dayDiary-title'>{diaryInfo?.title}</div>
-                <div className='dayDiary-short_emotion'>{diaryInfo?.shortFeedback}</div>
+                <div className='dayDiary-short_emotion'>{diaryInfo?.shortEmotion}</div>
                 <div className='dayDiary-content'>{diaryInfo?.content}</div>
                 <img className='dayDiary-img' src={emotionTypes[diaryInfo?.emotionType]} />
                 <button className='dayDiary-delete' onClick={onDelete} >삭제</button>

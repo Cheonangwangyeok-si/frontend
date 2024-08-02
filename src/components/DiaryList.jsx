@@ -133,7 +133,8 @@ const DiaryList = ({ diaryData, setDummy, setCurrentDate, setClickDay, setActive
     return (
         <div className='diaryList-container'>
             <div className='sort-options'>
-                <input type="text" placeholder='검색' value={search} onChange={(e) => { setSearch(e.target.value) }} />
+                <input type="text" placeholder='검색' value={search} onChange={(e) => { setSearch(e.target.value) }} className={`input ${search ? 'input-expanded' : ''}`} />
+
                 <select id="sortEmotion" className='sort-select' value={filterEmotion} onChange={(e) => { setFilterEmotion(e.target.value) }}>
                     <option value="default">감정</option>
                     <option value="HAPPINESS">행복</option>

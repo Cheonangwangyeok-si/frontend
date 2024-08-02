@@ -6,6 +6,7 @@ import SurprisedImage from "../images/Surprised.png";
 import BoringImage from "../images/Boring.png";
 
 const DayFeedback = ({ Info }) => {
+
     return (
         <div className="day-feedback-container">
             <p className='day-feedback-title'> AI 감정 피드백</p >
@@ -40,7 +41,7 @@ const DayFeedback = ({ Info }) => {
                     <b>{Info?.neutral}%</b>
                 </div>
             </div>
-            <p className='day-feedback-detailed_emotion'>{Info?.detailedEmotion}</p>
+            <p className='day-feedback-detailed_emotion'>{Info?.detailedEmotion ? Info?.detailedEmotion : Info?.shortEmotion}</p>
         </div >
     );
 };

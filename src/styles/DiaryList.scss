@@ -145,6 +145,33 @@
 
 .sort-options{
     margin: 28px 0px 39px 0px;
+    min-width: 650px;
+
+    .input {
+        height: 34px;
+        border-radius: 8px;
+        width: 78px;
+        border: none;
+        transition: 0.3s;
+        
+        &:focus{
+            width:400px;
+        }
+
+        &::placeholder{
+            background-image: url(../images/Search.png) ;
+            background-size: contain;
+            background-position:  5px center;
+            background-repeat: no-repeat;
+            text-indent: 25px;
+            font-weight: 600;
+            color:#2343B5;
+        }
+    }
+    
+    .input-expanded{
+        width:400px;
+    }
 
     .sort-select{
         color:#2343B5;
